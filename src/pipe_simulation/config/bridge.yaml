@@ -1,0 +1,72 @@
+# bridge.yaml
+# -----------
+# ros_gz_bridge topic configuration for the pipe inspection simulation.
+#
+# Direction notation (ros_gz_bridge convention):
+#   GZ_TO_ROS : Gazebo publishes → ROS2 subscribes
+#   ROS_TO_GZ : ROS2 publishes  → Gazebo subscribes
+#
+# Run via:
+#   ros2 run ros_gz_bridge parameter_bridge --ros-args -p config_file:=<path>
+# or use the ros_gz_bridge component node in the launch file.
+
+# --------------------------------------------------------------------------
+# Camera image  (Gazebo sensor → ROS2 pipeline)
+# --------------------------------------------------------------------------
+- ros_topic_name: /camera/image_raw
+  gz_topic_name:  /camera/image_raw
+  ros_type_name:  sensor_msgs/msg/Image
+  gz_type_name:   gz.msgs.Image
+  direction:      GZ_TO_ROS
+
+# Camera info (needed by image_transport and calibration tools)
+- ros_topic_name: /camera/camera_info
+  gz_topic_name:  /camera/camera_info
+  ros_type_name:  sensor_msgs/msg/CameraInfo
+  gz_type_name:   gz.msgs.CameraInfo
+  direction:      GZ_TO_ROS
+
+# --------------------------------------------------------------------------
+# IMU  (Gazebo sensor → ROS2)
+# --------------------------------------------------------------------------
+- ros_topic_name: /imu/data
+  gz_topic_name:  /imu/data
+  ros_type_name:  sensor_msgs/msg/Imu
+  gz_type_name:   gz.msgs.IMU
+  direction:      GZ_TO_ROS
+
+# --------------------------------------------------------------------------
+# Differential drive — velocity command (ROS2 → Gazebo)
+# --------------------------------------------------------------------------
+- ros_topic_name: /cmd_vel
+  gz_topic_name:  /cmd_vel
+  ros_type_name:  geometry_msgs/msg/Twist
+  gz_type_name:   gz.msgs.Twist
+  direction:      ROS_TO_GZ
+
+# --------------------------------------------------------------------------
+# Odometry  (Gazebo diff-drive plugin → ROS2)
+# --------------------------------------------------------------------------
+- ros_topic_name: /odom
+  gz_topic_name:  /odom
+  ros_type_name:  nav_msgs/msg/Odometry
+  gz_type_name:   gz.msgs.Odometry
+  direction:      GZ_TO_ROS
+
+# --------------------------------------------------------------------------
+# TF  (Gazebo diff-drive plugin → ROS2 tf2)
+# --------------------------------------------------------------------------
+- ros_topic_name: /tf
+  gz_topic_name:  /tf
+  ros_type_name:  tf2_msgs/msg/TFMessage
+  gz_type_name:   gz.msgs.Pose_V
+  direction:      GZ_TO_ROS
+
+# --------------------------------------------------------------------------
+# Joint states  (Gazebo joint-state-publisher → ROS2 robot_state_publisher)
+# --------------------------------------------------------------------------
+- ros_topic_name: /joint_states
+  gz_topic_name:  /joint_states
+  ros_type_name:  sensor_msgs/msg/JointState
+  gz_type_name:   gz.msgs.Model
+  direction:      GZ_TO_ROS

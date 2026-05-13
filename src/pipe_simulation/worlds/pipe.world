@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!--
+pipe.world
+----------
+Gazebo Harmonic (gz-sim 8) world containing a single hollow cylinder pipe
+and a spawn point for the pipe_bot robot.
+
+Coordinate frame
+  World Z = up (Gazebo default gravity = -Z).
+  The pipe mesh runs along its local Z axis; a pitch of +pi/2 rotates
+  it to run along the WORLD X axis.
+  After rotation:
+    Pipe axis     : (0,0,0) -> (5,0,0)  (world X)
+    Pipe cross-section centre is at world Y=0, Z=0
+    Inner floor   : world Z = -0.15 m
+    Robot spawn   : x=0.3  y=0  z=-0.115  (wheels rest on floor at z=-0.15)
+
+Mesh resolution
+  GZ_SIM_RESOURCE_PATH must include the package share directory so Gazebo
+  can resolve the bare URI  meshes/pipe_hollow.stl.
+  The launch file sets this env var before starting gz sim.
+-->
+<sdf version="1.10">
+  <world name="pipe_world">
+
+    <!-- ============================================================== -->
+    <!-- World-level system plugins required by Gazebo Harmonic          -->
+    <!-- ============================================================== -->
+
+    <!-- Physics step integration -->
+    <plugin filename="gz-sim-physics-system"
+            name="gz::sim::systems::Physics"/>
+
+    <!-- Allows spawning / deleting models at runtime (used by launch) -->
+    <plugin filename="gz-sim-user-commands-system"
+            name="gz::sim::systems::UserCommands"/>
+
+    <!-- Broadcasts scene state to gz-transport (needed by GUI and bridge) -->
+    <plugin filename="gz-sim-scene-broadcaster-system"
+            name="gz::sim::systems::SceneBroadcaster"/>
+
+    <!-- Camera / GPU sensors — ogre2 renderer required for wideanglecamera -->
+    <plugin filename="gz-sim-sensors-system"
+            name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- IMU sensor integration -->
+    <plugin filename="gz-sim-imu-system"
+            name="gz::sim::systems::Imu"/>
+
+    <!-- ============================================================== -->
+    <!-- Scene: dark ambient to simulate an unlit industrial pipe        -->
+    <!-- ============================================================== -->
+    <scene>
+      <!-- Very dim global ambient — robot headlight provides working light -->
+      <ambient>0.15 0.15 0.15 1.0</ambient>
+      <background>0.05 0.05 0.05 1.0</background>
+      <shadows>false</shadows>
+    </scene>
+
+    <!-- Weak directional light so Gazebo GUI renders something with no robot -->
+    <light name="ambient_sun" type="directional">
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.15 0.15 0.15 1</diffuse>
+      <specular>0.0 0.0 0.0 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <!-- ============================================================== -->
+    <!-- Pipe model                                                       -->
+    <!--                                                                  -->
+    <!-- The binary STL pipe_hollow.stl is a hollow cylinder:            -->
+    <!--   inner radius = 0.15 m, outer radius = 0.18 m, length = 5.0 m -->
+    <!--   mesh axis = local Z                                            -->
+    <!--                                                                  -->
+    <!-- Pose: roll=0  pitch=+pi/2  yaw=0                                -->
+    <!--   Rotates local Z onto world X, so the pipe runs East.          -->
+    <!-- ============================================================== -->
+    <model name="pipe">
+      <static>true</static>
+      <!-- x y z  roll pitch yaw -->
+      <pose>0 0 0  0 1.5708 0</pose>
+
+      <link name="pipe_link">
+
+        <!-- Collision geometry — robot wheels and body collide with the
+             inner surface (inward-pointing normals in the STL).         -->
+        <collision name="pipe_collision">
+          <geometry>
+            <mesh>
+              <uri>meshes/pipe_hollow.stl</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <!-- Concrete-like friction — good wheel traction -->
+                <mu>0.8</mu>
+                <mu2>0.8</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1000000.0</kp>
+                <kd>1.0</kd>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+
+        <!-- Visual geometry — concrete-grey material -->
+        <visual name="pipe_visual">
+          <geometry>
+            <mesh>
+              <uri>meshes/pipe_hollow.stl</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <!-- Concrete / cast-iron grey -->
+            <ambient>0.40 0.38 0.35 1</ambient>
+            <diffuse>0.50 0.48 0.44 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+            <emissive>0.0 0.0 0.0 1</emissive>
+          </material>
+        </visual>
+
+      </link>
+    </model>
+
+  </world>
+</sdf>
