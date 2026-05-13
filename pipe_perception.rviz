@@ -1,0 +1,59 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+    Help Height: 78
+    Splitter Ratio: 0.5
+    Tree Height: 557
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Enabled: true
+      Name: Grid
+      Reference Frame: <Fixed Frame>
+      Value: true
+      Plane Cell Count: 10
+      Cell Size: 1
+      Color: 160; 160; 164
+      Alpha: 0.5
+      Plane: XY
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: Cylinder Coverage
+      Queue Size: 100
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /visualization/cylinder
+      Value: true
+  Enabled: true
+  Fixed Frame: world
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: world
+    Frame Rate: 30
+  Name: root
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 6.0
+      Focal Point:
+        X: 0.0
+        Y: 0.0
+        Z: 1.0
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.5235987755982988
+      Target Frame: <Fixed Frame>
+      Value: Orbit (rviz)
+      Yaw: 0.7853981633974483
+Window Geometry:
+  Height: 900
+  Width: 1280
+  X: 100
+  Y: 50

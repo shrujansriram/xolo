@@ -1,0 +1,23 @@
+running egg_info
+writing ../../build/pipe_perception/pipe_perception.egg-info/PKG-INFO
+writing dependency_links to ../../build/pipe_perception/pipe_perception.egg-info/dependency_links.txt
+writing entry points to ../../build/pipe_perception/pipe_perception.egg-info/entry_points.txt
+writing requirements to ../../build/pipe_perception/pipe_perception.egg-info/requires.txt
+writing top-level names to ../../build/pipe_perception/pipe_perception.egg-info/top_level.txt
+reading manifest file '../../build/pipe_perception/pipe_perception.egg-info/SOURCES.txt'
+writing manifest file '../../build/pipe_perception/pipe_perception.egg-info/SOURCES.txt'
+running build
+running build_py
+running install
+running install_lib
+running install_data
+copying pipe_perception/launch/pipe_perception.launch.py -> /home/shrujans/inspectly/install/pipe_perception/share/pipe_perception/launch
+running install_egg_info
+removing '/home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception-0.0.1-py3.10.egg-info' (and everything under it)
+Copying ../../build/pipe_perception/pipe_perception.egg-info to /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception-0.0.1-py3.10.egg-info
+running install_scripts
+Installing coverage_mapper_node script to /home/shrujans/inspectly/install/pipe_perception/lib/pipe_perception
+Installing cylinder_unwrap_node script to /home/shrujans/inspectly/install/pipe_perception/lib/pipe_perception
+Installing cylinder_visualizer_3d_node script to /home/shrujans/inspectly/install/pipe_perception/lib/pipe_perception
+Installing video_ingest_node script to /home/shrujans/inspectly/install/pipe_perception/lib/pipe_perception
+writing list of installed files to '/home/shrujans/inspectly/build/pipe_perception/install.log'

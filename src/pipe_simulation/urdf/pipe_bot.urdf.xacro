@@ -1,0 +1,350 @@
+<?xml version="1.0"?>
+<!--
+pipe_bot.urdf.xacro
+
+Small differential-drive robot sized to fit inside a 0.15 m inner-radius pipe.
+
+Geometry summary:
+  Body     : box  0.15 m (X) x 0.12 m (Y) x 0.07 m (H)
+  Wheels   : cylinder r=0.040 m, l=0.025 m  at y = +/- 0.0875 m
+             outer wheel edge 0.100 m from centreline  (pipe r = 0.15 m OK)
+  Caster   : sphere r=0.015 m at rear-bottom
+  Total W  : 0.200 m  less than  0.300 m pipe diameter OK
+
+Links added per step:
+  Step 2 (this file)  : base_link, left/right wheels, caster
+  Step 3              : camera_link, imu_link
+  Step 4              : Gazebo plugins, materials, headlight
+-->
+<robot name="pipe_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ================================================================== -->
+  <!-- Constants                                                            -->
+  <!-- ================================================================== -->
+  <xacro:property name="body_len"    value="0.150"/>  <!-- X -->
+  <xacro:property name="body_width"  value="0.120"/>  <!-- Y -->
+  <xacro:property name="body_height" value="0.070"/>  <!-- Z -->
+
+  <xacro:property name="wheel_radius" value="0.040"/>
+  <xacro:property name="wheel_len"    value="0.025"/>
+  <!-- lateral offset from body centre to wheel centre -->
+  <xacro:property name="wheel_y"      value="0.0875"/>
+  <!-- wheel axle is level with the bottom face of the body -->
+  <xacro:property name="wheel_z"      value="${-body_height/2 + wheel_radius}"/>
+
+  <xacro:property name="caster_r"    value="0.015"/>
+  <!-- caster sits at rear, at floor level -->
+  <xacro:property name="caster_x"    value="${-body_len/2 + caster_r}"/>
+  <xacro:property name="caster_z"    value="${-body_height/2 - caster_r}"/>
+
+  <!-- Inertia helpers -->
+  <xacro:macro name="box_inertia" params="m lx ly lz">
+    <inertial>
+      <mass value="${m}"/>
+      <inertia
+        ixx="${m*(ly*ly+lz*lz)/12}"  ixy="0" ixz="0"
+        iyy="${m*(lx*lx+lz*lz)/12}"  iyz="0"
+        izz="${m*(lx*lx+ly*ly)/12}"/>
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="cylinder_inertia" params="m r l">
+    <inertial>
+      <mass value="${m}"/>
+      <inertia
+        ixx="${m*(3*r*r+l*l)/12}" ixy="0" ixz="0"
+        iyy="${m*(3*r*r+l*l)/12}" iyz="0"
+        izz="${m*r*r/2}"/>
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="sphere_inertia" params="m r">
+    <inertial>
+      <mass value="${m}"/>
+      <inertia
+        ixx="${2*m*r*r/5}" ixy="0" ixz="0"
+        iyy="${2*m*r*r/5}" iyz="0"
+        izz="${2*m*r*r/5}"/>
+    </inertial>
+  </xacro:macro>
+
+  <!-- ================================================================== -->
+  <!-- base_link — robot body                                               -->
+  <!-- ================================================================== -->
+  <link name="base_link">
+    <xacro:box_inertia m="3.0"
+      lx="${body_len}" ly="${body_width}" lz="${body_height}"/>
+    <visual>
+      <geometry>
+        <box size="${body_len} ${body_width} ${body_height}"/>
+      </geometry>
+      <material name="dark_grey">
+        <color rgba="0.3 0.3 0.3 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${body_len} ${body_width} ${body_height}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- ================================================================== -->
+  <!-- Left wheel                                                           -->
+  <!-- ================================================================== -->
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child  link="left_wheel"/>
+    <origin xyz="0 ${wheel_y} ${wheel_z}" rpy="${pi/2} 0 0"/>
+    <axis   xyz="0 0 1"/>
+  </joint>
+
+  <link name="left_wheel">
+    <xacro:cylinder_inertia m="0.3" r="${wheel_radius}" l="${wheel_len}"/>
+    <visual>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_len}"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_len}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- ================================================================== -->
+  <!-- Right wheel                                                          -->
+  <!-- ================================================================== -->
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child  link="right_wheel"/>
+    <origin xyz="0 ${-wheel_y} ${wheel_z}" rpy="${pi/2} 0 0"/>
+    <axis   xyz="0 0 1"/>
+  </joint>
+
+  <link name="right_wheel">
+    <xacro:cylinder_inertia m="0.3" r="${wheel_radius}" l="${wheel_len}"/>
+    <visual>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_len}"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_len}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- ================================================================== -->
+  <!-- Caster (rear, passive — fixed joint, frictionless in Gazebo)        -->
+  <!-- ================================================================== -->
+  <joint name="caster_joint" type="fixed">
+    <parent link="base_link"/>
+    <child  link="caster_link"/>
+    <origin xyz="${caster_x} 0 ${caster_z}" rpy="0 0 0"/>
+  </joint>
+
+  <link name="caster_link">
+    <xacro:sphere_inertia m="0.05" r="${caster_r}"/>
+    <visual>
+      <geometry>
+        <sphere radius="${caster_r}"/>
+      </geometry>
+      <material name="light_grey">
+        <color rgba="0.6 0.6 0.6 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="${caster_r}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- ================================================================== -->
+  <!-- camera_link                                                          -->
+  <!-- Mounted on top of the body, near the front face.                    -->
+  <!-- Looks forward along the robot +X axis.                              -->
+  <!-- With a 180-deg fisheye the pipe wall appears at ~50% image radius.  -->
+  <!-- ================================================================== -->
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child  link="camera_link"/>
+    <!-- Front of body (x = body_len/2 - 0.02 m inset), top face (z = body_height/2) -->
+    <origin xyz="${body_len/2 - 0.02} 0 ${body_height/2}" rpy="0 0 0"/>
+  </joint>
+
+  <link name="camera_link">
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0"
+               iyy="1e-6" iyz="0"
+               izz="1e-6"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.02 0.02 0.02"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0.0 0.4 0.8 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.02 0.02 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- ================================================================== -->
+  <!-- imu_link                                                             -->
+  <!-- Mounted at the body centre.                                          -->
+  <!-- ================================================================== -->
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child  link="imu_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="1e-7" ixy="0" ixz="0"
+               iyy="1e-7" iyz="0"
+               izz="1e-7"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0.0 0.8 0.2 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- ================================================================== -->
+  <!-- Gazebo Harmonic plugins                                              -->
+  <!-- ================================================================== -->
+
+  <!-- Frictionless caster so it does not fight the diff-drive odometry -->
+  <gazebo reference="caster_link">
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+  </gazebo>
+
+  <!-- Wheel friction (good traction on pipe floor) -->
+  <gazebo reference="left_wheel">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+  <gazebo reference="right_wheel">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+
+  <!-- Differential drive controller -->
+  <gazebo>
+    <plugin filename="gz-sim-diff-drive-system"
+            name="gz::sim::systems::DiffDrive">
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <!-- 2 * wheel_y = 2 * 0.0875 -->
+      <wheel_separation>0.175</wheel_separation>
+      <wheel_radius>0.040</wheel_radius>
+      <odom_publish_frequency>30</odom_publish_frequency>
+      <!-- Gazebo internal topic names (bridged to ROS2 in Step 8) -->
+      <topic>/cmd_vel</topic>
+      <odom_topic>/odom</odom_topic>
+      <tf_topic>/tf</tf_topic>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+    </plugin>
+  </gazebo>
+
+  <!-- Joint state publisher (wheel angles for robot_state_publisher) -->
+  <gazebo>
+    <plugin filename="gz-sim-joint-state-publisher-system"
+            name="gz::sim::systems::JointStatePublisher">
+      <topic>/joint_states</topic>
+    </plugin>
+  </gazebo>
+
+  <!-- Fisheye wide-angle camera on camera_link -->
+  <!-- 180-deg equidistant projection: pipe wall at 90-deg maps to -->
+  <!-- 50% of image radius. Set outer_fraction=0.50 in coverage    -->
+  <!-- mapper to capture this region.                               -->
+  <gazebo reference="camera_link">
+    <sensor name="fisheye_camera" type="wideanglecamera">
+      <always_on>1</always_on>
+      <update_rate>30</update_rate>
+      <topic>/camera/image_raw</topic>
+      <camera name="fisheye">
+        <!-- 180 degrees = pi radians -->
+        <horizontal_fov>3.14159265</horizontal_fov>
+        <image>
+          <!-- Square image for symmetric circular fisheye -->
+          <width>640</width>
+          <height>640</height>
+          <format>RGB_INT8</format>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>10.0</far>
+        </clip>
+        <lens>
+          <!-- equidistant: r = f * theta, natural fisheye model -->
+          <type>equidistant</type>
+          <scale_to_hfov>true</scale_to_hfov>
+          <!-- env cube map resolution: higher = less distortion artefacts -->
+          <env_texture_size>512</env_texture_size>
+        </lens>
+      </camera>
+    </sensor>
+    <!-- Headlight: point light that moves with camera_link -->
+    <light name="headlight" type="point">
+      <pose>0.05 0 0 0 0 0</pose>
+      <diffuse>1.0 1.0 0.9 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <attenuation>
+        <range>4.0</range>
+        <constant>0.4</constant>
+        <linear>0.1</linear>
+        <quadratic>0.02</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+  </gazebo>
+
+  <!-- IMU sensor on imu_link -->
+  <gazebo reference="imu_link">
+    <sensor name="imu_sensor" type="imu">
+      <always_on>1</always_on>
+      <update_rate>100</update_rate>
+      <topic>/imu/data</topic>
+      <imu>
+        <angular_velocity>
+          <x><noise type="gaussian"><mean>0</mean><stddev>0.0002</stddev></noise></x>
+          <y><noise type="gaussian"><mean>0</mean><stddev>0.0002</stddev></noise></y>
+          <z><noise type="gaussian"><mean>0</mean><stddev>0.0002</stddev></noise></z>
+        </angular_velocity>
+        <linear_acceleration>
+          <x><noise type="gaussian"><mean>0</mean><stddev>0.017</stddev></noise></x>
+          <y><noise type="gaussian"><mean>0</mean><stddev>0.017</stddev></noise></y>
+          <z><noise type="gaussian"><mean>0</mean><stddev>0.017</stddev></noise></z>
+        </linear_acceleration>
+      </imu>
+    </sensor>
+  </gazebo>
+
+</robot>

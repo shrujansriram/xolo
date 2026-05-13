@@ -1,0 +1,92 @@
+[1.970s] Invoking command in '/home/shrujans/inspectly/src/pipe_perception': PYTHONPATH=/home/shrujans/inspectly/build/pipe_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_perception build --build-base /home/shrujans/inspectly/build/pipe_perception/build install --record /home/shrujans/inspectly/build/pipe_perception/install.log --single-version-externally-managed install_data
+[2.292s] running egg_info
+[2.293s] creating ../../build/pipe_perception/pipe_perception.egg-info
+[2.294s] writing ../../build/pipe_perception/pipe_perception.egg-info/PKG-INFO
+[2.294s] writing dependency_links to ../../build/pipe_perception/pipe_perception.egg-info/dependency_links.txt
+[2.294s] writing entry points to ../../build/pipe_perception/pipe_perception.egg-info/entry_points.txt
+[2.296s] writing requirements to ../../build/pipe_perception/pipe_perception.egg-info/requires.txt
+[2.296s] writing top-level names to ../../build/pipe_perception/pipe_perception.egg-info/top_level.txt
+[2.296s] writing manifest file '../../build/pipe_perception/pipe_perception.egg-info/SOURCES.txt'
+[2.299s] reading manifest file '../../build/pipe_perception/pipe_perception.egg-info/SOURCES.txt'
+[2.300s] writing manifest file '../../build/pipe_perception/pipe_perception.egg-info/SOURCES.txt'
+[2.300s] running build
+[2.300s] running build_py
+[2.300s] creating /home/shrujans/inspectly/build/pipe_perception/build
+[2.301s] creating /home/shrujans/inspectly/build/pipe_perception/build/lib
+[2.302s] creating /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception
+[2.303s] copying pipe_perception/__init__.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception
+[2.304s] creating /home/shrujans/inspectly/build/pipe_perception/build/lib/nodes
+[2.304s] copying nodes/coverage_mapper_node.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/nodes
+[2.304s] copying nodes/cylinder_visualizer_3d_node.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/nodes
+[2.305s] copying nodes/cylinder_unwrap_node.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/nodes
+[2.305s] copying nodes/__init__.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/nodes
+[2.305s] copying nodes/video_ingest_node.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/nodes
+[2.306s] creating /home/shrujans/inspectly/build/pipe_perception/build/lib/algorithms
+[2.306s] copying algorithms/coverage_mapper.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/algorithms
+[2.307s] copying algorithms/cylinder_unwrap.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/algorithms
+[2.307s] copying algorithms/__init__.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/algorithms
+[2.307s] creating /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/nodes
+[2.308s] copying pipe_perception/nodes/coverage_mapper_node.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/nodes
+[2.308s] copying pipe_perception/nodes/cylinder_visualizer_3d_node.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/nodes
+[2.309s] copying pipe_perception/nodes/cylinder_unwrap_node.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/nodes
+[2.310s] copying pipe_perception/nodes/__init__.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/nodes
+[2.311s] copying pipe_perception/nodes/video_ingest_node.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/nodes
+[2.311s] creating /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/algorithms
+[2.313s] copying pipe_perception/algorithms/coverage_mapper.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/algorithms
+[2.313s] copying pipe_perception/algorithms/__init__.py -> /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/algorithms
+[2.314s] running install
+[2.314s] running install_lib
+[2.315s] creating /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception
+[2.315s] creating /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[2.317s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/nodes/coverage_mapper_node.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[2.317s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/nodes/cylinder_visualizer_3d_node.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[2.317s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/nodes/cylinder_unwrap_node.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[2.319s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/nodes/__init__.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[2.319s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/nodes/video_ingest_node.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[2.319s] creating /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/algorithms
+[2.319s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/algorithms/coverage_mapper.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/algorithms
+[2.320s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/algorithms/__init__.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/algorithms
+[2.320s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/pipe_perception/__init__.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception
+[2.321s] creating /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/nodes
+[2.321s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/nodes/coverage_mapper_node.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/nodes
+[2.322s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/nodes/cylinder_visualizer_3d_node.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/nodes
+[2.322s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/nodes/cylinder_unwrap_node.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/nodes
+[2.322s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/nodes/__init__.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/nodes
+[2.322s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/nodes/video_ingest_node.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/nodes
+[2.323s] creating /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/algorithms
+[2.323s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/algorithms/coverage_mapper.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/algorithms
+[2.323s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/algorithms/cylinder_unwrap.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/algorithms
+[2.323s] copying /home/shrujans/inspectly/build/pipe_perception/build/lib/algorithms/__init__.py -> /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/algorithms
+[2.324s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes/coverage_mapper_node.py to coverage_mapper_node.cpython-310.pyc
+[2.326s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes/cylinder_visualizer_3d_node.py to cylinder_visualizer_3d_node.cpython-310.pyc
+[2.328s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes/cylinder_unwrap_node.py to cylinder_unwrap_node.cpython-310.pyc
+[2.329s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes/__init__.py to __init__.cpython-310.pyc
+[2.329s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes/video_ingest_node.py to video_ingest_node.cpython-310.pyc
+[2.331s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/algorithms/coverage_mapper.py to coverage_mapper.cpython-310.pyc
+[2.332s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/algorithms/__init__.py to __init__.cpython-310.pyc
+[2.332s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/__init__.py to __init__.cpython-310.pyc
+[2.333s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/nodes/coverage_mapper_node.py to coverage_mapper_node.cpython-310.pyc
+[2.334s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/nodes/cylinder_visualizer_3d_node.py to cylinder_visualizer_3d_node.cpython-310.pyc
+[2.334s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/nodes/cylinder_unwrap_node.py to cylinder_unwrap_node.cpython-310.pyc
+[2.334s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/nodes/__init__.py to __init__.cpython-310.pyc
+[2.335s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/nodes/video_ingest_node.py to video_ingest_node.cpython-310.pyc
+[2.336s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/algorithms/coverage_mapper.py to coverage_mapper.cpython-310.pyc
+[2.337s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/algorithms/cylinder_unwrap.py to cylinder_unwrap.cpython-310.pyc
+[2.338s] byte-compiling /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/algorithms/__init__.py to __init__.cpython-310.pyc
+[2.338s] running install_data
+[2.338s] creating /home/shrujans/inspectly/install/pipe_perception/share/ament_index
+[2.339s] creating /home/shrujans/inspectly/install/pipe_perception/share/ament_index/resource_index
+[2.339s] creating /home/shrujans/inspectly/install/pipe_perception/share/ament_index/resource_index/packages
+[2.341s] copying resource/pipe_perception -> /home/shrujans/inspectly/install/pipe_perception/share/ament_index/resource_index/packages
+[2.341s] copying package.xml -> /home/shrujans/inspectly/install/pipe_perception/share/pipe_perception
+[2.341s] creating /home/shrujans/inspectly/install/pipe_perception/share/pipe_perception/launch
+[2.341s] copying pipe_perception/launch/pipe_perception.launch.py -> /home/shrujans/inspectly/install/pipe_perception/share/pipe_perception/launch
+[2.341s] running install_egg_info
+[2.344s] Copying ../../build/pipe_perception/pipe_perception.egg-info to /home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages/pipe_perception-0.0.1-py3.10.egg-info
+[2.346s] running install_scripts
+[2.377s] Installing coverage_mapper_node script to /home/shrujans/inspectly/install/pipe_perception/lib/pipe_perception
+[2.378s] Installing cylinder_unwrap_node script to /home/shrujans/inspectly/install/pipe_perception/lib/pipe_perception
+[2.378s] Installing cylinder_visualizer_3d_node script to /home/shrujans/inspectly/install/pipe_perception/lib/pipe_perception
+[2.378s] Installing video_ingest_node script to /home/shrujans/inspectly/install/pipe_perception/lib/pipe_perception
+[2.379s] writing list of installed files to '/home/shrujans/inspectly/build/pipe_perception/install.log'
+[2.420s] Invoked command in '/home/shrujans/inspectly/src/pipe_perception' returned '0': PYTHONPATH=/home/shrujans/inspectly/build/pipe_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/inspectly/install/pipe_perception/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_perception build --build-base /home/shrujans/inspectly/build/pipe_perception/build install --record /home/shrujans/inspectly/build/pipe_perception/install.log --single-version-externally-managed install_data
