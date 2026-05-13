@@ -1,4 +1,3 @@
-README.md
 package.xml
 setup.cfg
 setup.py
@@ -18,6 +17,13 @@ nodes/cylinder_unwrap_node.py
 nodes/cylinder_visualizer_3d_node.py
 nodes/video_ingest_node.py
 pipe_perception/__init__.py
+pipe_perception.egg-info/PKG-INFO
+pipe_perception.egg-info/SOURCES.txt
+pipe_perception.egg-info/dependency_links.txt
+pipe_perception.egg-info/entry_points.txt
+pipe_perception.egg-info/requires.txt
+pipe_perception.egg-info/top_level.txt
+pipe_perception.egg-info/zip-safe
 pipe_perception/algorithms/__init__.py
 pipe_perception/algorithms/coverage_mapper.py
 pipe_perception/algorithms/cylinder_unwrap.py

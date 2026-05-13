@@ -1,0 +1,129 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+    Help Height: 78
+    Splitter Ratio: 0.5
+    Tree Height: 557
+Visualization Manager:
+  Class: ""
+  Displays:
+    # ------------------------------------------------------------------ #
+    # Reference grid (XZ plane — pipe runs along world X)
+    # ------------------------------------------------------------------ #
+    - Class: rviz_default_plugins/Grid
+      Enabled: true
+      Name: Grid
+      Reference Frame: world
+      Value: true
+      Plane Cell Count: 12
+      Cell Size: 0.5
+      Color: 100; 100; 100
+      Alpha: 0.3
+      Plane: XZ
+
+    # ------------------------------------------------------------------ #
+    # 3D pipe coverage cylinder
+    # ------------------------------------------------------------------ #
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: Cylinder Coverage
+      Queue Size: 100
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /visualization/cylinder
+      Value: true
+
+    # ------------------------------------------------------------------ #
+    # Robot model (TF + URDF)
+    # ------------------------------------------------------------------ #
+    - Class: rviz_default_plugins/RobotModel
+      Enabled: true
+      Name: Robot Model
+      Description Topic:
+        Depth: 5
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /robot_description
+      Value: true
+
+    # ------------------------------------------------------------------ #
+    # TF frame tree
+    # ------------------------------------------------------------------ #
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Name: TF
+      Marker Scale: 0.3
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Value: true
+
+    # ------------------------------------------------------------------ #
+    # Live fisheye camera image
+    # ------------------------------------------------------------------ #
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Name: Fisheye Camera
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /camera/image_raw
+      Value: true
+      Max Value: 1
+      Min Value: 0
+      Normalize Range: true
+      Queue Size: 2
+
+    # ------------------------------------------------------------------ #
+    # Odometry path trail
+    # ------------------------------------------------------------------ #
+    - Class: rviz_default_plugins/Odometry
+      Enabled: true
+      Name: Odometry
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /odom
+      Value: true
+      Keep: 500
+      Angle Tolerance: 0.1
+      Position Tolerance: 0.01
+
+  Enabled: true
+  Fixed Frame: world
+  Global Options:
+    Background Color: 25; 25; 25
+    Fixed Frame: world
+    Frame Rate: 30
+  Name: root
+  Views:
+    Current:
+      # Isometric-ish view looking along the pipe from outside
+      Class: rviz_default_plugins/Orbit
+      Distance: 3.5
+      Focal Point:
+        X: 1.5
+        Y: 0.0
+        Z: 0.0
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.45
+      Target Frame: world
+      Value: Orbit (rviz)
+      Yaw: 1.2
+Window Geometry:
+  Height: 900
+  Width: 1400
+  X: 80
+  Y: 40

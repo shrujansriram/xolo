@@ -33,7 +33,7 @@ setup(
     tests_require=["pytest"],
     entry_points={
         "console_scripts": [
-            # Step 11 will add odom_depth_node here
+            "odom_depth_node = pipe_simulation.odom_depth_node:main",
         ],
     },
 )

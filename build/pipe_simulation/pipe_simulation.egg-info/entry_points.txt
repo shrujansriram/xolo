@@ -1,0 +1,3 @@
+[console_scripts]
+odom_depth_node = pipe_simulation.odom_depth_node:main
+

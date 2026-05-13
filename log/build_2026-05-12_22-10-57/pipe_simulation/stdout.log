@@ -1,0 +1,35 @@
+running develop
+running egg_info
+creating pipe_simulation.egg-info
+writing pipe_simulation.egg-info/PKG-INFO
+writing dependency_links to pipe_simulation.egg-info/dependency_links.txt
+writing entry points to pipe_simulation.egg-info/entry_points.txt
+writing requirements to pipe_simulation.egg-info/requires.txt
+writing top-level names to pipe_simulation.egg-info/top_level.txt
+writing manifest file 'pipe_simulation.egg-info/SOURCES.txt'
+reading manifest file 'pipe_simulation.egg-info/SOURCES.txt'
+writing manifest file 'pipe_simulation.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/shrujans/inspectly/install/pipe_simulation/lib/python3.10/site-packages/pipe-simulation.egg-link (link to .)
+Installing odom_depth_node script to /home/shrujans/inspectly/install/pipe_simulation/lib/pipe_simulation
+
+Installed /home/shrujans/inspectly/build/pipe_simulation
+running symlink_data
+creating /home/shrujans/inspectly/install/pipe_simulation/share/ament_index
+creating /home/shrujans/inspectly/install/pipe_simulation/share/ament_index/resource_index
+creating /home/shrujans/inspectly/install/pipe_simulation/share/ament_index/resource_index/packages
+symbolically linking /home/shrujans/inspectly/build/pipe_simulation/resource/pipe_simulation -> /home/shrujans/inspectly/install/pipe_simulation/share/ament_index/resource_index/packages
+symbolically linking /home/shrujans/inspectly/build/pipe_simulation/package.xml -> /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation
+creating /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/launch
+symbolically linking /home/shrujans/inspectly/build/pipe_simulation/launch/gazebo.launch.py -> /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/launch
+symbolically linking /home/shrujans/inspectly/build/pipe_simulation/launch/sim.launch.py -> /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/launch
+creating /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/urdf
+symbolically linking /home/shrujans/inspectly/build/pipe_simulation/urdf/pipe_bot.urdf.xacro -> /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/urdf
+creating /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/worlds
+symbolically linking /home/shrujans/inspectly/build/pipe_simulation/worlds/pipe.world -> /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/worlds
+creating /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/meshes
+symbolically linking /home/shrujans/inspectly/build/pipe_simulation/meshes/pipe_hollow.stl -> /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/meshes
+creating /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/config
+symbolically linking /home/shrujans/inspectly/build/pipe_simulation/config/bridge.yaml -> /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/config
+creating /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/rviz
+symbolically linking /home/shrujans/inspectly/build/pipe_simulation/rviz/sim.rviz -> /home/shrujans/inspectly/install/pipe_simulation/share/pipe_simulation/rviz

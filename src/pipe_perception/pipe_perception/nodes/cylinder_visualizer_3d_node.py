@@ -40,6 +40,7 @@ import numpy as np
 import rclpy
 from cv_bridge import CvBridge, CvBridgeError
 from geometry_msgs.msg import Point
+from rcl_interfaces.msg import SetParametersResult
 from rclpy.node import Node
 from sensor_msgs.msg import Image
 from std_msgs.msg import ColorRGBA
@@ -95,6 +96,11 @@ class CylinderVisualizer3DNode(Node):
         self._frame_count  = 0
 
         # ------------------------------------------------------------------ #
+        # Parameter update callback (allows live depth_per_frame changes)
+        # ------------------------------------------------------------------ #
+        self.add_on_set_parameters_callback(self._on_parameters_changed)
+
+        # ------------------------------------------------------------------ #
         # Subscriber / Publisher
         # ------------------------------------------------------------------ #
         self._subscriber = self.create_subscription(
@@ -120,6 +126,19 @@ class CylinderVisualizer3DNode(Node):
             f"  Grid step      : {self._grid_step} (mesh downsample factor)\n"
             f"  Frame ID       : {self.FRAME_ID}"
         )
+
+    # ---------------------------------------------------------------------- #
+    # Parameter callback — allows odom_depth_node to push live updates
+    # ---------------------------------------------------------------------- #
+
+    def _on_parameters_changed(self, params) -> SetParametersResult:
+        for param in params:
+            if param.name == "depth_per_frame" and float(param.value) > 0.0:
+                self._depth_per_frame = float(param.value)
+                self.get_logger().info(
+                    f"depth_per_frame updated to {self._depth_per_frame:.5f} m/frame"
+                )
+        return SetParametersResult(successful=True)
 
     # ---------------------------------------------------------------------- #
     # Callback
