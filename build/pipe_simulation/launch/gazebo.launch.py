@@ -1,1 +1,1 @@
-/home/shrujans/inspectly/src/pipe_simulation/launch/gazebo.launch.py
+/home/shrujans/xolo/src/pipe_simulation/launch/gazebo.launch.py

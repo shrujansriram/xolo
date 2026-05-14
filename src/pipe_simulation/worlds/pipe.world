@@ -39,11 +39,10 @@ Mesh resolution
     <plugin filename="gz-sim-scene-broadcaster-system"
             name="gz::sim::systems::SceneBroadcaster"/>
 
-    <!-- Camera / GPU sensors — ogre2 renderer required for wideanglecamera -->
-    <plugin filename="gz-sim-sensors-system"
-            name="gz::sim::systems::Sensors">
-      <render_engine>ogre2</render_engine>
-    </plugin>
+    <!-- NOTE: gz-sim-sensors-system (Ogre2) is intentionally omitted.
+         Camera images are provided by synthetic_camera_node (ROS2).
+         This avoids the Ogre2 Fixed-Function-Pipeline crash on WSL2
+         software rendering (EGL_MESA_device_software). -->
 
     <!-- IMU sensor integration -->
     <plugin filename="gz-sim-imu-system"
@@ -53,17 +52,17 @@ Mesh resolution
     <!-- Scene: dark ambient to simulate an unlit industrial pipe        -->
     <!-- ============================================================== -->
     <scene>
-      <!-- Very dim global ambient — robot headlight provides working light -->
-      <ambient>0.15 0.15 0.15 1.0</ambient>
+      <!-- Moderate ambient so camera sees pipe interior without a headlight -->
+      <ambient>0.6 0.6 0.6 1.0</ambient>
       <background>0.05 0.05 0.05 1.0</background>
       <shadows>false</shadows>
     </scene>
 
-    <!-- Weak directional light so Gazebo GUI renders something with no robot -->
+    <!-- Directional light to illuminate pipe interior for the camera -->
     <light name="ambient_sun" type="directional">
       <pose>0 0 10 0 0 0</pose>
-      <diffuse>0.15 0.15 0.15 1</diffuse>
-      <specular>0.0 0.0 0.0 1</specular>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
       <direction>-0.5 0.1 -0.9</direction>
       <cast_shadows>false</cast_shadows>
     </light>

@@ -11,6 +11,15 @@
 # or use the ros_gz_bridge component node in the launch file.
 
 # --------------------------------------------------------------------------
+# Simulation clock — REQUIRED for use_sim_time=true nodes to unfreeze
+# --------------------------------------------------------------------------
+- ros_topic_name: /clock
+  gz_topic_name:  /clock
+  ros_type_name:  rosgraph_msgs/msg/Clock
+  gz_type_name:   gz.msgs.Clock
+  direction:      GZ_TO_ROS
+
+# --------------------------------------------------------------------------
 # Camera image  (Gazebo sensor → ROS2 pipeline)
 # --------------------------------------------------------------------------
 - ros_topic_name: /camera/image_raw

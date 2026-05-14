@@ -34,6 +34,8 @@ setup(
     entry_points={
         "console_scripts": [
             "odom_depth_node = pipe_simulation.odom_depth_node:main",
+            "auto_drive_node = pipe_simulation.auto_drive_node:main",
+            "synthetic_camera_node = pipe_simulation.synthetic_camera_node:main",
         ],
     },
 )

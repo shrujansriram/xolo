@@ -48,6 +48,7 @@ from launch.actions import (
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description():
@@ -88,19 +89,22 @@ def generate_launch_description():
             os.path.join(pkg_rgs, "launch", "gz_sim.launch.py")
         ),
         launch_arguments={
-            "gz_args": os.path.join(pkg_sim, "worlds", "pipe.world"),
+            "gz_args": f"-r -s {os.path.join(pkg_sim, 'worlds', 'pipe.world')}",
         }.items(),
     )
 
     # ------------------------------------------------------------------
     # 2. robot_state_publisher
     # ------------------------------------------------------------------
-    robot_description_content = Command(
-        [
-            FindExecutable(name="xacro"),
-            " ",
-            os.path.join(pkg_sim, "urdf", "pipe_bot.urdf.xacro"),
-        ]
+    robot_description_content = ParameterValue(
+        Command(
+            [
+                FindExecutable(name="xacro"),
+                " ",
+                os.path.join(pkg_sim, "urdf", "pipe_bot.urdf.xacro"),
+            ]
+        ),
+        value_type=str,
     )
     robot_state_publisher = Node(
         package="robot_state_publisher",
@@ -209,7 +213,7 @@ def generate_launch_description():
         executable="odom_depth_node",
         name="odom_depth_node",
         parameters=[
-            {"camera_fps":    30.0},
+            {"camera_fps":    10.0},
             {"update_period":  1.0},
             {"alpha":          0.3},
             {"use_sim_time":  use_sim_time},
@@ -218,7 +222,43 @@ def generate_launch_description():
     )
 
     # ------------------------------------------------------------------
-    # 9. RViz2
+    # 9. auto_drive_node
+    #    Drives the robot forward 4.5 m through the pipe automatically.
+    #    Waits for /odom before moving, so it is safe to launch early.
+    # ------------------------------------------------------------------
+    auto_drive = Node(
+        package="pipe_simulation",
+        executable="auto_drive_node",
+        name="auto_drive_node",
+        parameters=[
+            {"linear_speed":  0.10},
+            {"pipe_length":   4.50},
+            {"cmd_rate_hz":   10.0},
+            {"use_sim_time":  use_sim_time},
+        ],
+        output="screen",
+    )
+
+    # ------------------------------------------------------------------
+    # 10. synthetic_camera_node
+    #     Publishes /camera/image_raw without Ogre2/Gazebo.
+    #     Bypasses the EGL_MESA_device_software fixed-function crash on WSL2.
+    # ------------------------------------------------------------------
+    synthetic_camera = Node(
+        package="pipe_simulation",
+        executable="synthetic_camera_node",
+        name="synthetic_camera_node",
+        parameters=[
+            {"pipe_radius":    pipe_radius},
+            {"image_size":     320},
+            {"update_rate_hz": 10.0},
+            {"use_sim_time":   use_sim_time},
+        ],
+        output="screen",
+    )
+
+    # ------------------------------------------------------------------
+    # 11. RViz2
     # ------------------------------------------------------------------
     rviz_config = os.path.join(pkg_sim, "rviz", "sim.rviz")
     rviz = Node(
@@ -256,6 +296,8 @@ def generate_launch_description():
             coverage_mapper,
             cylinder_visualizer,
             odom_depth,
+            auto_drive,
+            synthetic_camera,
             # Visualisation
             world_tf,
             rviz,

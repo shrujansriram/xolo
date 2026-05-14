@@ -1,0 +1,50 @@
+[0.472s] Invoking command in '/home/shrujans/xolo/src/pipe_simulation': PYTHONPATH=/home/shrujans/xolo/build/pipe_simulation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_simulation build --build-base /home/shrujans/xolo/build/pipe_simulation/build install --record /home/shrujans/xolo/build/pipe_simulation/install.log --single-version-externally-managed install_data
+[0.576s] running egg_info
+[0.577s] creating ../../build/pipe_simulation/pipe_simulation.egg-info
+[0.577s] writing ../../build/pipe_simulation/pipe_simulation.egg-info/PKG-INFO
+[0.577s] writing dependency_links to ../../build/pipe_simulation/pipe_simulation.egg-info/dependency_links.txt
+[0.577s] writing entry points to ../../build/pipe_simulation/pipe_simulation.egg-info/entry_points.txt
+[0.577s] writing requirements to ../../build/pipe_simulation/pipe_simulation.egg-info/requires.txt
+[0.577s] writing top-level names to ../../build/pipe_simulation/pipe_simulation.egg-info/top_level.txt
+[0.577s] writing manifest file '../../build/pipe_simulation/pipe_simulation.egg-info/SOURCES.txt'
+[0.578s] reading manifest file '../../build/pipe_simulation/pipe_simulation.egg-info/SOURCES.txt'
+[0.578s] writing manifest file '../../build/pipe_simulation/pipe_simulation.egg-info/SOURCES.txt'
+[0.579s] running build
+[0.579s] running build_py
+[0.579s] creating /home/shrujans/xolo/build/pipe_simulation/build
+[0.579s] creating /home/shrujans/xolo/build/pipe_simulation/build/lib
+[0.579s] creating /home/shrujans/xolo/build/pipe_simulation/build/lib/pipe_simulation
+[0.579s] copying pipe_simulation/odom_depth_node.py -> /home/shrujans/xolo/build/pipe_simulation/build/lib/pipe_simulation
+[0.580s] copying pipe_simulation/__init__.py -> /home/shrujans/xolo/build/pipe_simulation/build/lib/pipe_simulation
+[0.580s] running install
+[0.580s] running install_lib
+[0.580s] creating /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation
+[0.581s] copying /home/shrujans/xolo/build/pipe_simulation/build/lib/pipe_simulation/odom_depth_node.py -> /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation
+[0.581s] copying /home/shrujans/xolo/build/pipe_simulation/build/lib/pipe_simulation/__init__.py -> /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation
+[0.581s] byte-compiling /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation/odom_depth_node.py to odom_depth_node.cpython-310.pyc
+[0.582s] byte-compiling /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation/__init__.py to __init__.cpython-310.pyc
+[0.582s] running install_data
+[0.582s] creating /home/shrujans/xolo/install/pipe_simulation/share/ament_index
+[0.582s] creating /home/shrujans/xolo/install/pipe_simulation/share/ament_index/resource_index
+[0.582s] creating /home/shrujans/xolo/install/pipe_simulation/share/ament_index/resource_index/packages
+[0.583s] copying resource/pipe_simulation -> /home/shrujans/xolo/install/pipe_simulation/share/ament_index/resource_index/packages
+[0.583s] copying package.xml -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation
+[0.583s] creating /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/launch
+[0.583s] copying launch/gazebo.launch.py -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/launch
+[0.583s] copying launch/sim.launch.py -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/launch
+[0.583s] creating /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/urdf
+[0.583s] copying urdf/pipe_bot.urdf.xacro -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/urdf
+[0.584s] creating /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/worlds
+[0.584s] copying worlds/pipe.world -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/worlds
+[0.584s] creating /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/meshes
+[0.585s] copying meshes/pipe_hollow.stl -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/meshes
+[0.586s] creating /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/config
+[0.586s] copying config/bridge.yaml -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/config
+[0.586s] creating /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/rviz
+[0.586s] copying rviz/sim.rviz -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/rviz
+[0.586s] running install_egg_info
+[0.586s] Copying ../../build/pipe_simulation/pipe_simulation.egg-info to /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation-0.0.1-py3.10.egg-info
+[0.587s] running install_scripts
+[0.598s] Installing odom_depth_node script to /home/shrujans/xolo/install/pipe_simulation/lib/pipe_simulation
+[0.598s] writing list of installed files to '/home/shrujans/xolo/build/pipe_simulation/install.log'
+[0.611s] Invoked command in '/home/shrujans/xolo/src/pipe_simulation' returned '0': PYTHONPATH=/home/shrujans/xolo/build/pipe_simulation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_simulation build --build-base /home/shrujans/xolo/build/pipe_simulation/build install --record /home/shrujans/xolo/build/pipe_simulation/install.log --single-version-externally-managed install_data

@@ -34,6 +34,7 @@ from launch.actions import (
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description():
@@ -67,19 +68,22 @@ def generate_launch_description():
             os.path.join(ros_gz_sim_share, "launch", "gz_sim.launch.py")
         ),
         launch_arguments={
-            "gz_args": os.path.join(pkg_share, "worlds", "pipe.world"),
+            "gz_args": f"-r -s {os.path.join(pkg_share, 'worlds', 'pipe.world')}",
         }.items(),
     )
 
     # ------------------------------------------------------------------
     # Expand URDF with xacro
     # ------------------------------------------------------------------
-    robot_description_content = Command(
-        [
-            FindExecutable(name="xacro"),
-            " ",
-            os.path.join(pkg_share, "urdf", "pipe_bot.urdf.xacro"),
-        ]
+    robot_description_content = ParameterValue(
+        Command(
+            [
+                FindExecutable(name="xacro"),
+                " ",
+                os.path.join(pkg_share, "urdf", "pipe_bot.urdf.xacro"),
+            ]
+        ),
+        value_type=str,
     )
     robot_description = {"robot_description": robot_description_content}
 

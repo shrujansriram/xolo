@@ -1,0 +1,95 @@
+[0.484s] Invoking command in '/home/shrujans/xolo/src/pipe_perception': PYTHONPATH=/home/shrujans/xolo/build/pipe_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_perception build --build-base /home/shrujans/xolo/build/pipe_perception/build install --record /home/shrujans/xolo/build/pipe_perception/install.log --single-version-externally-managed install_data
+[0.584s] running egg_info
+[0.584s] creating ../../build/pipe_perception/pipe_perception.egg-info
+[0.584s] writing ../../build/pipe_perception/pipe_perception.egg-info/PKG-INFO
+[0.584s] writing dependency_links to ../../build/pipe_perception/pipe_perception.egg-info/dependency_links.txt
+[0.584s] writing entry points to ../../build/pipe_perception/pipe_perception.egg-info/entry_points.txt
+[0.585s] writing requirements to ../../build/pipe_perception/pipe_perception.egg-info/requires.txt
+[0.585s] writing top-level names to ../../build/pipe_perception/pipe_perception.egg-info/top_level.txt
+[0.585s] writing manifest file '../../build/pipe_perception/pipe_perception.egg-info/SOURCES.txt'
+[0.586s] reading manifest file '../../build/pipe_perception/pipe_perception.egg-info/SOURCES.txt'
+[0.586s] writing manifest file '../../build/pipe_perception/pipe_perception.egg-info/SOURCES.txt'
+[0.586s] running build
+[0.586s] running build_py
+[0.587s] creating /home/shrujans/xolo/build/pipe_perception/build
+[0.587s] creating /home/shrujans/xolo/build/pipe_perception/build/lib
+[0.587s] creating /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception
+[0.587s] copying pipe_perception/__init__.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception
+[0.588s] creating /home/shrujans/xolo/build/pipe_perception/build/lib/nodes
+[0.588s] copying nodes/coverage_mapper_node.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/nodes
+[0.588s] copying nodes/cylinder_visualizer_3d_node.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/nodes
+[0.588s] copying nodes/cylinder_unwrap_node.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/nodes
+[0.588s] copying nodes/__init__.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/nodes
+[0.588s] copying nodes/video_ingest_node.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/nodes
+[0.588s] creating /home/shrujans/xolo/build/pipe_perception/build/lib/algorithms
+[0.588s] copying algorithms/coverage_mapper.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/algorithms
+[0.588s] copying algorithms/cylinder_unwrap.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/algorithms
+[0.589s] copying algorithms/__init__.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/algorithms
+[0.589s] creating /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes
+[0.589s] copying pipe_perception/nodes/coverage_mapper_node.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes
+[0.589s] copying pipe_perception/nodes/cylinder_visualizer_3d_node.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes
+[0.589s] copying pipe_perception/nodes/cylinder_unwrap_node.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes
+[0.589s] copying pipe_perception/nodes/__init__.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes
+[0.589s] copying pipe_perception/nodes/video_ingest_node.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes
+[0.590s] creating /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/algorithms
+[0.590s] copying pipe_perception/algorithms/coverage_mapper.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/algorithms
+[0.590s] copying pipe_perception/algorithms/cylinder_unwrap.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/algorithms
+[0.591s] copying pipe_perception/algorithms/__init__.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/algorithms
+[0.591s] running install
+[0.591s] running install_lib
+[0.591s] creating /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception
+[0.591s] creating /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[0.592s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes/coverage_mapper_node.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[0.592s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes/cylinder_visualizer_3d_node.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[0.592s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes/cylinder_unwrap_node.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[0.592s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes/__init__.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[0.592s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes/video_ingest_node.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[0.592s] creating /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/algorithms
+[0.593s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/algorithms/coverage_mapper.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/algorithms
+[0.593s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/algorithms/cylinder_unwrap.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/algorithms
+[0.593s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/algorithms/__init__.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/algorithms
+[0.593s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/__init__.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception
+[0.593s] creating /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/nodes
+[0.593s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/nodes/coverage_mapper_node.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/nodes
+[0.593s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/nodes/cylinder_visualizer_3d_node.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/nodes
+[0.593s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/nodes/cylinder_unwrap_node.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/nodes
+[0.593s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/nodes/__init__.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/nodes
+[0.593s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/nodes/video_ingest_node.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/nodes
+[0.593s] creating /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/algorithms
+[0.593s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/algorithms/coverage_mapper.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/algorithms
+[0.593s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/algorithms/cylinder_unwrap.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/algorithms
+[0.593s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/algorithms/__init__.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/algorithms
+[0.594s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes/coverage_mapper_node.py to coverage_mapper_node.cpython-310.pyc
+[0.594s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes/cylinder_visualizer_3d_node.py to cylinder_visualizer_3d_node.cpython-310.pyc
+[0.594s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes/cylinder_unwrap_node.py to cylinder_unwrap_node.cpython-310.pyc
+[0.594s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes/__init__.py to __init__.cpython-310.pyc
+[0.594s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes/video_ingest_node.py to video_ingest_node.cpython-310.pyc
+[0.595s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/algorithms/coverage_mapper.py to coverage_mapper.cpython-310.pyc
+[0.596s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/algorithms/cylinder_unwrap.py to cylinder_unwrap.cpython-310.pyc
+[0.596s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/algorithms/__init__.py to __init__.cpython-310.pyc
+[0.596s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/__init__.py to __init__.cpython-310.pyc
+[0.596s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/nodes/coverage_mapper_node.py to coverage_mapper_node.cpython-310.pyc
+[0.596s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/nodes/cylinder_visualizer_3d_node.py to cylinder_visualizer_3d_node.cpython-310.pyc
+[0.596s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/nodes/cylinder_unwrap_node.py to cylinder_unwrap_node.cpython-310.pyc
+[0.597s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/nodes/__init__.py to __init__.cpython-310.pyc
+[0.597s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/nodes/video_ingest_node.py to video_ingest_node.cpython-310.pyc
+[0.597s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/algorithms/coverage_mapper.py to coverage_mapper.cpython-310.pyc
+[0.597s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/algorithms/cylinder_unwrap.py to cylinder_unwrap.cpython-310.pyc
+[0.597s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/algorithms/__init__.py to __init__.cpython-310.pyc
+[0.597s] running install_data
+[0.597s] creating /home/shrujans/xolo/install/pipe_perception/share/ament_index
+[0.597s] creating /home/shrujans/xolo/install/pipe_perception/share/ament_index/resource_index
+[0.597s] creating /home/shrujans/xolo/install/pipe_perception/share/ament_index/resource_index/packages
+[0.597s] copying resource/pipe_perception -> /home/shrujans/xolo/install/pipe_perception/share/ament_index/resource_index/packages
+[0.598s] copying package.xml -> /home/shrujans/xolo/install/pipe_perception/share/pipe_perception
+[0.598s] creating /home/shrujans/xolo/install/pipe_perception/share/pipe_perception/launch
+[0.598s] copying pipe_perception/launch/pipe_perception.launch.py -> /home/shrujans/xolo/install/pipe_perception/share/pipe_perception/launch
+[0.598s] running install_egg_info
+[0.599s] Copying ../../build/pipe_perception/pipe_perception.egg-info to /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception-0.0.1-py3.10.egg-info
+[0.600s] running install_scripts
+[0.611s] Installing coverage_mapper_node script to /home/shrujans/xolo/install/pipe_perception/lib/pipe_perception
+[0.611s] Installing cylinder_unwrap_node script to /home/shrujans/xolo/install/pipe_perception/lib/pipe_perception
+[0.611s] Installing cylinder_visualizer_3d_node script to /home/shrujans/xolo/install/pipe_perception/lib/pipe_perception
+[0.611s] Installing video_ingest_node script to /home/shrujans/xolo/install/pipe_perception/lib/pipe_perception
+[0.612s] writing list of installed files to '/home/shrujans/xolo/build/pipe_perception/install.log'
+[0.629s] Invoked command in '/home/shrujans/xolo/src/pipe_perception' returned '0': PYTHONPATH=/home/shrujans/xolo/build/pipe_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_perception build --build-base /home/shrujans/xolo/build/pipe_perception/build install --record /home/shrujans/xolo/build/pipe_perception/install.log --single-version-externally-managed install_data

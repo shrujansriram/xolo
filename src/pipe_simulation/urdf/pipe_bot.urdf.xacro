@@ -33,9 +33,11 @@ Links added per step:
   <xacro:property name="wheel_z"      value="${-body_height/2 + wheel_radius}"/>
 
   <xacro:property name="caster_r"    value="0.015"/>
-  <!-- caster sits at rear, at floor level -->
+  <!-- caster bottom must be level with wheel bottoms so both contact the floor.
+       wheel bottom = wheel_z - wheel_radius = (−body_height/2 + wheel_radius) − wheel_radius = −body_height/2
+       caster bottom = caster_z − caster_r  →  caster_z = −body_height/2 + caster_r -->
   <xacro:property name="caster_x"    value="${-body_len/2 + caster_r}"/>
-  <xacro:property name="caster_z"    value="${-body_height/2 - caster_r}"/>
+  <xacro:property name="caster_z"    value="${-body_height/2 + caster_r}"/>
 
   <!-- Inertia helpers -->
   <xacro:macro name="box_inertia" params="m lx ly lz">
@@ -78,9 +80,6 @@ Links added per step:
       <geometry>
         <box size="${body_len} ${body_width} ${body_height}"/>
       </geometry>
-      <material name="dark_grey">
-        <color rgba="0.3 0.3 0.3 1.0"/>
-      </material>
     </visual>
     <collision>
       <geometry>
@@ -105,9 +104,6 @@ Links added per step:
       <geometry>
         <cylinder radius="${wheel_radius}" length="${wheel_len}"/>
       </geometry>
-      <material name="black">
-        <color rgba="0.1 0.1 0.1 1.0"/>
-      </material>
     </visual>
     <collision>
       <geometry>
@@ -132,9 +128,6 @@ Links added per step:
       <geometry>
         <cylinder radius="${wheel_radius}" length="${wheel_len}"/>
       </geometry>
-      <material name="black">
-        <color rgba="0.1 0.1 0.1 1.0"/>
-      </material>
     </visual>
     <collision>
       <geometry>
@@ -158,9 +151,6 @@ Links added per step:
       <geometry>
         <sphere radius="${caster_r}"/>
       </geometry>
-      <material name="light_grey">
-        <color rgba="0.6 0.6 0.6 1.0"/>
-      </material>
     </visual>
     <collision>
       <geometry>
@@ -193,9 +183,6 @@ Links added per step:
       <geometry>
         <box size="0.02 0.02 0.02"/>
       </geometry>
-      <material name="blue">
-        <color rgba="0.0 0.4 0.8 1.0"/>
-      </material>
     </visual>
     <collision>
       <geometry>
@@ -225,9 +212,6 @@ Links added per step:
       <geometry>
         <box size="0.01 0.01 0.01"/>
       </geometry>
-      <material name="green">
-        <color rgba="0.0 0.8 0.2 1.0"/>
-      </material>
     </visual>
   </link>
 
@@ -280,51 +264,8 @@ Links added per step:
     </plugin>
   </gazebo>
 
-  <!-- Fisheye wide-angle camera on camera_link -->
-  <!-- 180-deg equidistant projection: pipe wall at 90-deg maps to -->
-  <!-- 50% of image radius. Set outer_fraction=0.50 in coverage    -->
-  <!-- mapper to capture this region.                               -->
-  <gazebo reference="camera_link">
-    <sensor name="fisheye_camera" type="wideanglecamera">
-      <always_on>1</always_on>
-      <update_rate>30</update_rate>
-      <topic>/camera/image_raw</topic>
-      <camera name="fisheye">
-        <!-- 180 degrees = pi radians -->
-        <horizontal_fov>3.14159265</horizontal_fov>
-        <image>
-          <!-- Square image for symmetric circular fisheye -->
-          <width>640</width>
-          <height>640</height>
-          <format>RGB_INT8</format>
-        </image>
-        <clip>
-          <near>0.01</near>
-          <far>10.0</far>
-        </clip>
-        <lens>
-          <!-- equidistant: r = f * theta, natural fisheye model -->
-          <type>equidistant</type>
-          <scale_to_hfov>true</scale_to_hfov>
-          <!-- env cube map resolution: higher = less distortion artefacts -->
-          <env_texture_size>512</env_texture_size>
-        </lens>
-      </camera>
-    </sensor>
-    <!-- Headlight: point light that moves with camera_link -->
-    <light name="headlight" type="point">
-      <pose>0.05 0 0 0 0 0</pose>
-      <diffuse>1.0 1.0 0.9 1</diffuse>
-      <specular>0.3 0.3 0.3 1</specular>
-      <attenuation>
-        <range>4.0</range>
-        <constant>0.4</constant>
-        <linear>0.1</linear>
-        <quadratic>0.02</quadratic>
-      </attenuation>
-      <cast_shadows>false</cast_shadows>
-    </light>
-  </gazebo>
+  <!-- camera_link exists for TF; images provided by synthetic_camera_node.
+       gz-sim-sensors-system (Ogre2) removed to avoid WSL2 rendering crash. -->
 
   <!-- IMU sensor on imu_link -->
   <gazebo reference="imu_link">

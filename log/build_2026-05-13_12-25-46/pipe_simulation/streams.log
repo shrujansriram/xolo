@@ -1,0 +1,23 @@
+[0.505s] Invoking command in '/home/shrujans/xolo/src/pipe_simulation': PYTHONPATH=/home/shrujans/xolo/build/pipe_simulation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_simulation build --build-base /home/shrujans/xolo/build/pipe_simulation/build install --record /home/shrujans/xolo/build/pipe_simulation/install.log --single-version-externally-managed install_data
+[0.676s] running egg_info
+[0.677s] writing ../../build/pipe_simulation/pipe_simulation.egg-info/PKG-INFO
+[0.677s] writing dependency_links to ../../build/pipe_simulation/pipe_simulation.egg-info/dependency_links.txt
+[0.677s] writing entry points to ../../build/pipe_simulation/pipe_simulation.egg-info/entry_points.txt
+[0.677s] writing requirements to ../../build/pipe_simulation/pipe_simulation.egg-info/requires.txt
+[0.677s] writing top-level names to ../../build/pipe_simulation/pipe_simulation.egg-info/top_level.txt
+[0.679s] reading manifest file '../../build/pipe_simulation/pipe_simulation.egg-info/SOURCES.txt'
+[0.679s] writing manifest file '../../build/pipe_simulation/pipe_simulation.egg-info/SOURCES.txt'
+[0.679s] running build
+[0.679s] running build_py
+[0.680s] running install
+[0.680s] running install_lib
+[0.682s] running install_data
+[0.682s] copying launch/gazebo.launch.py -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/launch
+[0.683s] copying launch/sim.launch.py -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/launch
+[0.683s] running install_egg_info
+[0.685s] removing '/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation-0.0.1-py3.10.egg-info' (and everything under it)
+[0.685s] Copying ../../build/pipe_simulation/pipe_simulation.egg-info to /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation-0.0.1-py3.10.egg-info
+[0.686s] running install_scripts
+[0.703s] Installing odom_depth_node script to /home/shrujans/xolo/install/pipe_simulation/lib/pipe_simulation
+[0.703s] writing list of installed files to '/home/shrujans/xolo/build/pipe_simulation/install.log'
+[0.724s] Invoked command in '/home/shrujans/xolo/src/pipe_simulation' returned '0': PYTHONPATH=/home/shrujans/xolo/build/pipe_simulation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_simulation build --build-base /home/shrujans/xolo/build/pipe_simulation/build install --record /home/shrujans/xolo/build/pipe_simulation/install.log --single-version-externally-managed install_data

@@ -1,0 +1,33 @@
+[0.000000] (-) TimerEvent: {}
+[0.000068] (-) JobUnselected: {'identifier': 'pipe_perception'}
+[0.000087] (pipe_simulation) JobQueued: {'identifier': 'pipe_simulation', 'dependencies': OrderedDict()}
+[0.000099] (pipe_simulation) JobStarted: {'identifier': 'pipe_simulation'}
+[0.099244] (-) TimerEvent: {}
+[0.199360] (-) TimerEvent: {}
+[0.299514] (-) TimerEvent: {}
+[0.345092] (pipe_simulation) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/pipe_simulation', 'build', '--build-base', '/home/shrujans/xolo/build/pipe_simulation/build', 'install', '--record', '/home/shrujans/xolo/build/pipe_simulation/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/shrujans/xolo/src/pipe_simulation', 'env': {'USER': 'shrujans', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/shrujans', 'OLDPWD': '/home/shrujans/xolo', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'WSL_DISTRO_NAME': 'Ubuntu-22.04', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'humble', 'LOGNAME': 'shrujans', 'NAME': 'ShrujanLenovo1', 'WSL_INTEROP': '/run/WSL/5781_interop', 'PULSE_SERVER': 'unix:/mnt/wslg/PulseServer', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm-256color', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/shruj/bin:/mnt/c/Program Files/Git/mingw64/bin:/mnt/c/Program Files/Git/usr/local/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Program Files/Git/mingw64/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Users/shruj/bin:/mnt/c/Python3.14/Scripts:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Windows/System32/OpenSSH:/mnt/c/Program Files/nodejs:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/CMake/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/Program Files/Amazon/AWSCLIV2:/mnt/c/Users/shruj/AppData/Local/Programs/Python/Python312/Scripts:/mnt/c/Users/shruj/AppData/Local/Programs/Python/Python312:/mnt/c/Python3.14/Scripts:/mnt/c/Python3.14:/mnt/c/Users/shruj/AppData/Local/Programs/Python/Launcher:/mnt/c/Users/shruj/.local/bin:/mnt/c/Users/shruj/AppData/Local/pnpm:/mnt/c/Users/shruj/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/shruj/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/shruj/AppData/Local/GitHubDesktop/bin:/mnt/c/Users/shruj/AppData/Roaming/npm:/mnt/c/Users/shruj/AppData/Local/Python/bin:/mnt/c/Program Files/Git/usr/bin/vendor_perl:/mnt/c/Program Files/Git/usr/bin/core_perl', 'XDG_RUNTIME_DIR': '/run/user/1000/', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'AMENT_PREFIX_PATH': '/opt/ros/humble', 'SHELL': '/bin/bash', 'PWD': '/home/shrujans/xolo/build/pipe_simulation', 'PYTHONPATH': '/home/shrujans/xolo/build/pipe_simulation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'WSL2_GUI_APPS_ENABLED': '1', 'HOSTTYPE': 'x86_64', 'WSLENV': 'ELECTRON_RUN_AS_NODE/w:'}, 'shell': False}
+[0.399588] (-) TimerEvent: {}
+[0.459238] (pipe_simulation) StdoutLine: {'line': b'running egg_info\n'}
+[0.459884] (pipe_simulation) StdoutLine: {'line': b'writing ../../build/pipe_simulation/pipe_simulation.egg-info/PKG-INFO\n'}
+[0.460108] (pipe_simulation) StdoutLine: {'line': b'writing dependency_links to ../../build/pipe_simulation/pipe_simulation.egg-info/dependency_links.txt\n'}
+[0.460271] (pipe_simulation) StdoutLine: {'line': b'writing entry points to ../../build/pipe_simulation/pipe_simulation.egg-info/entry_points.txt\n'}
+[0.460444] (pipe_simulation) StdoutLine: {'line': b'writing requirements to ../../build/pipe_simulation/pipe_simulation.egg-info/requires.txt\n'}
+[0.460583] (pipe_simulation) StdoutLine: {'line': b'writing top-level names to ../../build/pipe_simulation/pipe_simulation.egg-info/top_level.txt\n'}
+[0.461837] (pipe_simulation) StdoutLine: {'line': b"reading manifest file '../../build/pipe_simulation/pipe_simulation.egg-info/SOURCES.txt'\n"}
+[0.462370] (pipe_simulation) StdoutLine: {'line': b"writing manifest file '../../build/pipe_simulation/pipe_simulation.egg-info/SOURCES.txt'\n"}
+[0.462416] (pipe_simulation) StdoutLine: {'line': b'running build\n'}
+[0.462442] (pipe_simulation) StdoutLine: {'line': b'running build_py\n'}
+[0.462658] (pipe_simulation) StdoutLine: {'line': b'running install\n'}
+[0.462808] (pipe_simulation) StdoutLine: {'line': b'running install_lib\n'}
+[0.463567] (pipe_simulation) StdoutLine: {'line': b'running install_data\n'}
+[0.463957] (pipe_simulation) StdoutLine: {'line': b'copying urdf/pipe_bot.urdf.xacro -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/urdf\n'}
+[0.464149] (pipe_simulation) StdoutLine: {'line': b'running install_egg_info\n'}
+[0.465179] (pipe_simulation) StdoutLine: {'line': b"removing '/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation-0.0.1-py3.10.egg-info' (and everything under it)\n"}
+[0.465584] (pipe_simulation) StdoutLine: {'line': b'Copying ../../build/pipe_simulation/pipe_simulation.egg-info to /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation-0.0.1-py3.10.egg-info\n'}
+[0.466218] (pipe_simulation) StdoutLine: {'line': b'running install_scripts\n'}
+[0.478290] (pipe_simulation) StdoutLine: {'line': b'Installing auto_drive_node script to /home/shrujans/xolo/install/pipe_simulation/lib/pipe_simulation\n'}
+[0.478497] (pipe_simulation) StdoutLine: {'line': b'Installing odom_depth_node script to /home/shrujans/xolo/install/pipe_simulation/lib/pipe_simulation\n'}
+[0.478659] (pipe_simulation) StdoutLine: {'line': b"writing list of installed files to '/home/shrujans/xolo/build/pipe_simulation/install.log'\n"}
+[0.491388] (pipe_simulation) CommandEnded: {'returncode': 0}
+[0.498993] (pipe_simulation) JobEnded: {'identifier': 'pipe_simulation', 'rc': 0}
+[0.499458] (-) EventReactorShutdown: {}
