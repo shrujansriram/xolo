@@ -126,6 +126,16 @@ class SyntheticCamera(Node):
         outside = shade < 0.0
         img[outside] = 0
 
+        # ------------------------------------------------------------------ #
+        # Simulated camera blind sector (60° wedge, top of image).           #
+        # phi in [-pi, pi]; wedge covers [pi/2 - pi/6, pi/2 + pi/6] =       #
+        # [60°, 120°] — top portion.  Only applied to pipe-wall pixels       #
+        # (normalised radius R > 0.35) to keep the centre clear.             #
+        # This creates a persistent azimuthal gap in coverage.               #
+        # ------------------------------------------------------------------ #
+        blind = (phi > (math.pi / 3.0)) & (phi < (2.0 * math.pi / 3.0)) & (shade >= 0.0)
+        img[blind] = 0
+
         return img
 
 

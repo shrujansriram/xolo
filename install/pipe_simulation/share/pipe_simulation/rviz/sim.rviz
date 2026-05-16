@@ -37,10 +37,10 @@ Visualization Manager:
       Value: true
 
     # ------------------------------------------------------------------ #
-    # Robot model (TF + URDF)
+    # Robot model (TF + URDF) — disabled: show pipe only, not crawler
     # ------------------------------------------------------------------ #
     - Class: rviz_default_plugins/RobotModel
-      Enabled: true
+      Enabled: false
       Name: Robot Model
       Description Topic:
         Depth: 5
@@ -48,19 +48,19 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /robot_description
-      Value: true
+      Value: false
 
     # ------------------------------------------------------------------ #
-    # TF frame tree
+    # TF frame tree — disabled alongside robot model
     # ------------------------------------------------------------------ #
     - Class: rviz_default_plugins/TF
-      Enabled: true
+      Enabled: false
       Name: TF
       Marker Scale: 0.3
       Show Arrows: true
       Show Axes: true
       Show Names: false
-      Value: true
+      Value: false
 
     # ------------------------------------------------------------------ #
     # Live fisheye camera image

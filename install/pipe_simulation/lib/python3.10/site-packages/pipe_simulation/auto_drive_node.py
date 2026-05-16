@@ -1,38 +1,53 @@
 """
 auto_drive_node.py
 ------------------
-Drives the pipe_bot forward through the pipe at a constant speed.
+Drives the pipe_bot through the pipe with a variable-speed profile so that
+some sections are traversed quickly (producing longitudinal coverage gaps)
+while others are traversed slowly (producing dense coverage).
 
-Behaviour
-  1. Wait for /odom to confirm the robot is alive and physics is running.
-  2. Drive forward at `linear_speed` m/s until `pipe_length` metres have
-     been covered (measured from odometry).
-  3. Stop and hold position.
+Speed profile  (distance from start → speed)
+  0.0 – 1.2 m  :  0.06 m/s  ← slow, dense coverage
+  1.2 – 2.0 m  :  0.35 m/s  ← fast burst  → GAP A  (missed section)
+  2.0 – 2.8 m  :  0.06 m/s  ← slow, dense coverage
+  2.8 – 3.4 m  :  0.28 m/s  ← fast burst  → GAP B  (missed section)
+  3.4 – 4.5 m  :  0.06 m/s  ← slow, dense coverage
 
 Parameters (all ROS2 parameters, settable from launch or command line)
-  linear_speed   (default 0.10)  — forward speed in m/s
   pipe_length    (default 4.50)  — metres to travel before stopping
   cmd_rate_hz    (default 10.0)  — rate at which cmd_vel is published
   use_sim_time   (default true)  — must match the rest of the stack
 """
-
-import math
 
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
+# (distance_start, distance_end, speed_m_s)
+_SPEED_PROFILE = [
+    (0.0,  1.2,  0.06),   # slow — dense coverage
+    (1.2,  2.0,  0.35),   # fast burst — GAP A
+    (2.0,  2.8,  0.06),   # slow — dense coverage
+    (2.8,  3.4,  0.28),   # fast burst — GAP B
+    (3.4,  4.5,  0.06),   # slow — dense coverage
+]
+
+
+def _speed_at(distance: float) -> float:
+    """Return the desired forward speed for the current odometry distance."""
+    for d_start, d_end, spd in _SPEED_PROFILE:
+        if distance < d_end:
+            return spd
+    return 0.0   # past the last segment
+
 
 class AutoDrive(Node):
     def __init__(self):
         super().__init__("auto_drive_node")
 
-        self.declare_parameter("linear_speed", 0.10)
         self.declare_parameter("pipe_length",  4.50)
         self.declare_parameter("cmd_rate_hz",  10.0)
 
-        self._speed      = self.get_parameter("linear_speed").value
         self._pipe_len   = self.get_parameter("pipe_length").value
         self._rate_hz    = self.get_parameter("cmd_rate_hz").value
 
@@ -49,8 +64,8 @@ class AutoDrive(Node):
         )
 
         self.get_logger().info(
-            f"auto_drive_node ready — driving {self._pipe_len} m "
-            f"at {self._speed} m/s"
+            f"auto_drive_node ready — variable-speed profile over "
+            f"{self._pipe_len} m (gaps at 1.2-2.0 m and 2.8-3.4 m)"
         )
 
     # ------------------------------------------------------------------
@@ -80,7 +95,7 @@ class AutoDrive(Node):
             return
 
         cmd = Twist()
-        cmd.linear.x = self._speed
+        cmd.linear.x = _speed_at(self._distance)
         self._pub.publish(cmd)
 
 
