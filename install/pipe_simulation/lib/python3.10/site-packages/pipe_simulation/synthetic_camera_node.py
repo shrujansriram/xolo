@@ -12,7 +12,7 @@ For each fisheye pixel a ray is cast from the robot's current (x, y, yaw)
 into the 3D world.  The pipe is a cylinder of radius pipe_radius aligned
 with the +X axis.  Rays are intersected analytically with:
   * the pipe cylinder surface
-  * any rock obstacles (volumetric axis-aligned boxes)
+  * any sphere obstacles (volumetric, centred in the cross-section)
 
 Coordinate conventions
 -----------------------
@@ -31,34 +31,36 @@ Ray direction for pixel (cos_theta, sin_theta, cos_phi, sin_phi):
   d_y =  cos_theta * sin_yaw - sin_theta * cos_phi * cos_yaw
   d_z = -sin_theta * sin_phi
 
+Rays are unit vectors: |d|^2 = cos^2(theta) + sin^2(theta) = 1.
+
 Cylinder intersection (camera inside the pipe, cam_z = 0):
   a   = d_y^2 + d_z^2
   b   = 2 * cam_y * d_y
   c   = cam_y^2 - R^2     (negative: camera always inside cylinder)
   t_cyl = (-b + sqrt(b^2 - 4ac)) / (2a)    [larger forward root]
 
-Rock intersection (AABB slab test):
-  The rock is a volumetric box [x1,x2] x [y1,y2] x [z1,z2].
-  Standard slab intersection: compute per-axis (t_enter, t_exit) intervals,
-  then t_enter_total = max of t_enters, t_exit_total = min of t_exits.
-  A hit occurs when t_enter_total < t_exit_total and t_exit_total > 0.
-  If t_enter_total < t_cyl, the rock occludes the pipe wall -> near-black.
+Sphere intersection (ray-sphere, |d|=1 so a=1):
+  oc   = cam_origin - sphere_centre
+  b    = 2 * (d . oc)
+  c    = |oc|^2 - r^2
+  disc = b^2 - 4c
+  t_sphere = (-b - sqrt(disc)) / 2   [smaller root = entry point]
+  Hit when disc >= 0  AND  t_sphere > 0  AND  t_sphere < t_cyl
 
 Key insight for coverage gaps:
-  When the robot is INSIDE the rock's x-range [x1, x2], sideways-looking
-  rays (theta~90 deg, outer ring of the fisheye) hit the rock at a short
-  distance before the pipe wall.  Those pixels are in the outer ring of the
-  cylindrical-unwrapped image that the coverage mapper samples.  With the
-  threshold fixed to >30 in coverage_mapper_node, near-black [22,14,8]
-  pixels are recorded as "uncovered" -> blue in the 3D cylinder.
+  When the robot passes the sphere at (1.5, 0, 0) while at y=+0.08,
+  rightward-looking rays (theta~90 deg, outer ring of fisheye) enter the
+  sphere at t~0.04 m — much closer than the pipe wall at t~0.23 m.
+  Those pixels fall in the outer ring that coverage_mapper samples.
+  With threshold > 30, near-black [22,14,8] pixels are recorded as
+  "uncovered" -> blue in the 3D cylinder.
 
 Parameters
-  pipe_radius      (default 0.15)  inner pipe radius [m]
-  image_size       (default 320)   square image side [px]
-  update_rate_hz   (default 10.0)  publish rate [Hz]
-  use_sim_time     (default true)
-  walls            (default "")    e.g. "1.5:right"
-  rock_half_length (default 0.20)  half-length of rock box in X [m]
+  pipe_radius       (default 0.15)  inner pipe radius [m]
+  image_size        (default 320)   square image side [px]
+  update_rate_hz    (default 10.0)  publish rate [Hz]
+  use_sim_time      (default true)
+  sphere_obstacles  (default "")    "x:radius" or "x:y:z:radius", comma-sep
 """
 
 import math
@@ -78,23 +80,23 @@ class SyntheticCamera(Node):
         self.declare_parameter("pipe_radius",      0.15)
         self.declare_parameter("image_size",       320)
         self.declare_parameter("update_rate_hz",   10.0)
-        self.declare_parameter("walls",            "")
-        self.declare_parameter("rock_half_length", 0.20)
+        self.declare_parameter("sphere_obstacles", "")
 
         self._r    = float(self.get_parameter("pipe_radius").value)
         self._sz   = int(self.get_parameter("image_size").value)
         self._rate = float(self.get_parameter("update_rate_hz").value)
-        self._rhl  = float(self.get_parameter("rock_half_length").value)
 
-        # Parse wall/rock descriptors: "x:side,x:side,..."
-        walls_str = str(self.get_parameter("walls").value).strip()
-        self._rocks: list = []
-        if walls_str:
-            for part in walls_str.split(","):
-                part = part.strip()
-                if ":" in part:
-                    x_str, side = part.split(":", 1)
-                    self._rocks.append((float(x_str.strip()), side.strip()))
+        # Parse sphere descriptors: "x:radius" or "x:y:z:radius", comma-sep.
+        # Spheres are centred at (x, y, z) — default y=0, z=0 (pipe centre).
+        spheres_str = str(self.get_parameter("sphere_obstacles").value).strip()
+        self._spheres: list = []   # (cx, cy, cz, radius)
+        if spheres_str:
+            for part in spheres_str.split(","):
+                tokens = [t.strip() for t in part.strip().split(":")]
+                if len(tokens) == 2:
+                    self._spheres.append((float(tokens[0]), 0.0, 0.0, float(tokens[1])))
+                elif len(tokens) == 4:
+                    self._spheres.append(tuple(float(t) for t in tokens))
 
         # Robot pose — updated from /odom
         self._robot_x   = 0.0
@@ -118,14 +120,14 @@ class SyntheticCamera(Node):
             1.0 / self._rate, self._publish_frame
         )
 
-        rock_desc = (
-            ", ".join(f"x={x:.2f}:{s}" for x, s in self._rocks)
+        sphere_desc = (
+            ", ".join(f"({sx:.2f},{sy:.2f},{sz:.2f}) r={sr:.3f}"
+                      for sx, sy, sz, sr in self._spheres)
             or "none"
         )
         self.get_logger().info(
             f"synthetic_camera_node ready — {self._sz}x{self._sz} px "
-            f"@ {self._rate} Hz — rocks: [{rock_desc}] "
-            f"half_length={self._rhl:.2f} m — physics ray-caster"
+            f"@ {self._rate} Hz — spheres: [{sphere_desc}] — physics ray-caster"
         )
 
     # ------------------------------------------------------------------
@@ -225,43 +227,14 @@ class SyntheticCamera(Node):
 
         img[~self._valid] = 0
 
-        # ---- Rock obstacles (volumetric AABB slab intersection) -----------
-        if self._rocks:
-            img = self._render_rocks(img, cam_x, cam_y, d_x, d_y, d_z, t_cyl)
+        # ---- Sphere obstacles (analytic ray-sphere intersection) -----------
+        if self._spheres:
+            img = self._render_spheres(img, cam_x, cam_y, d_x, d_y, d_z, t_cyl)
 
         return img
 
     # ------------------------------------------------------------------
-    def _slab(
-        self,
-        d: np.ndarray,
-        origin: float,
-        lo: float,
-        hi: float,
-    ):
-        """
-        Per-axis slab intersection for AABB ray-box test (vectorised).
-
-        Returns (t_lo, t_hi) arrays representing the [entry, exit] parameter
-        range for this axis.
-
-        When d=0 (ray parallel to slab):
-          * origin inside [lo, hi]  -> entire ray is inside: t in (-inf, +inf)
-          * origin outside [lo, hi] -> no intersection:      t in (+inf, -inf)
-        """
-        _E   = 1e-9
-        ok   = np.abs(d) > _E
-        # Safe denominator (avoid /0 — result ignored when not ok)
-        d_s  = np.where(ok, d, 1.0)
-        t_a  = np.where(ok, (lo - origin) / d_s, 0.0)
-        t_b  = np.where(ok, (hi - origin) / d_s, 0.0)
-
-        inside = (origin >= lo) and (origin <= hi)
-        t_lo = np.where(ok, np.minimum(t_a, t_b), (-1e7 if inside else  1e7))
-        t_hi = np.where(ok, np.maximum(t_a, t_b), ( 1e7 if inside else -1e7))
-        return t_lo, t_hi
-
-    def _render_rocks(
+    def _render_spheres(
         self,
         img:   np.ndarray,
         cam_x: float,
@@ -272,48 +245,42 @@ class SyntheticCamera(Node):
         t_cyl: np.ndarray,
     ) -> np.ndarray:
         """
-        Paint rock obstacles using ray-AABB (slab) intersection.
+        Paint sphere obstacles using analytic ray-sphere intersection.
 
-        Each rock is a volumetric box:
-          X: [x_wall - rock_half_length, x_wall + rock_half_length]
-          Y: [-R, -0.01]  for 'right' rock  (right half, 1 cm gap)
-             [+0.01,  R]  for 'left'  rock
-          Z: [-R, R]       full pipe height
+        Rays are unit vectors (|d|=1), so the quadratic simplifies:
+          a = 1
+          b = 2 * (d . oc),   oc = cam_origin - sphere_centre
+          c = |oc|^2 - r^2
+          disc = b^2 - 4c
+          t_entry = (-b - sqrt(disc)) / 2   [near intersection]
 
-        Critical physics: when the robot is INSIDE the rock's X-range,
-        sideways rays (theta~90 deg, phi~0) hit the rock at a very short
-        distance before the pipe wall.  These pixels appear in the OUTER
-        ring of the cylindrical-unwrapped image — the ring that the
-        coverage_mapper_node samples for angular coverage.  Painting them
-        near-black [22, 14, 8] causes the coverage mapper (threshold > 30)
-        to record those angular bins as 'uncovered', producing a blue strip
-        in the 3-D cylinder visualization.
+        When robot passes at y=+0.08 and sphere is at (1.5, 0, 0) r=0.04:
+          rightward ray (theta=90°): oc=(0, 0.08, 0), b=2*(-1)*0.08=-0.16,
+          c=0.08^2-0.04^2=0.0048, disc=0.0256-0.0192=0.0064>0.
+          t_entry=(0.16-0.08)/2=0.04 m  << t_cyl~0.23 m  -> sphere blocks it.
         """
-        R  = self._r
-        hl = self._rhl
+        for sx, sy, sz, sr in self._spheres:
+            # oc = cam_origin - sphere_centre  (cam_z = 0)
+            ocx = cam_x - sx
+            ocy = cam_y - sy
+            ocz = 0.0   - sz
 
-        for x_wall, side in self._rocks:
-            x1, x2 = x_wall - hl, x_wall + hl
-            if side == "right":
-                y1, y2 = -R, -0.01   # right half of pipe cross-section
-            else:
-                y1, y2 = 0.01, R     # left half
-            z1, z2 = -R, R
+            # a = 1 (unit rays)
+            b    = 2.0 * (d_x * ocx + d_y * ocy + d_z * ocz)
+            c    = ocx * ocx + ocy * ocy + ocz * ocz - sr * sr
+            disc = b * b - 4.0 * c
 
-            tx_lo, tx_hi = self._slab(d_x, cam_x, x1, x2)
-            ty_lo, ty_hi = self._slab(d_y, cam_y, y1, y2)
-            tz_lo, tz_hi = self._slab(d_z, 0.0,   z1, z2)
+            hit      = disc >= 0.0
+            disc_s   = np.where(hit, disc, 0.0)
+            t_sphere = np.where(hit, (-b - np.sqrt(disc_s)) / 2.0, 1e6)
 
-            t_enter = np.maximum(np.maximum(tx_lo, ty_lo), tz_lo)
-            t_exit  = np.minimum(np.minimum(tx_hi, ty_hi), tz_hi)
-
-            rock_mask = (
-                (t_enter < t_exit)        # valid box intersection
-                & (t_exit  > 1e-9)        # box is (at least partly) ahead
-                & (t_enter < t_cyl)       # box is closer than pipe wall
-                & self._valid             # inside fisheye circle
+            sphere_mask = (
+                hit
+                & (t_sphere > 1e-9)    # entry point is ahead of camera
+                & (t_sphere < t_cyl)   # sphere is closer than pipe wall
+                & self._valid          # inside fisheye circle
             )
-            img[rock_mask] = np.array([22, 14, 8], dtype=np.uint8)
+            img[sphere_mask] = np.array([22, 14, 8], dtype=np.uint8)
 
         return img
 

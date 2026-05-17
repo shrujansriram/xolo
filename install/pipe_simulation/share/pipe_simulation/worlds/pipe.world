@@ -3,22 +3,19 @@
 pipe.world
 ----------
 Gazebo Harmonic (gz-sim 8) world — straight hollow pipe with one
-volumetric rock obstacle blocking the right half of the cross-section.
+sphere obstacle centred in the cross-section at x=1.5 m.
 
 Coordinate frame
   World Z = up.  Pipe along +X.
   Robot spawn: x=0.05  y=0  z=-0.115  (wheels rest at z=-0.15)
 
-Rock obstacle
-  x in [1.30, 1.70] m  (0.40 m thick - prevents robot from phasing through)
-  y in [-0.14, -0.01] m  (right half of cross-section, 1 cm gap at y=0)
-  z in [-0.15, +0.15] m  (full pipe height)
+Sphere obstacle
+  Centre: (1.5, 0, 0)  — middle of the pipe cross-section
+  Radius: 0.04 m
 
-  Gazebo model: box centred at (1.50, -0.075, 0), size 0.40 x 0.13 x 0.30 m.
-
-The robot swerves LEFT (y > 0) to avoid the rock.  The pipe wall on the
-right side (y < 0) within x in [1.30, 1.70] is never inspected, producing
-a blue strip in the 3-D cylinder coverage map.
+  The robot swerves LEFT (y > 0) to go around the sphere.
+  The right side of the pipe wall (y < 0) near x=1.5 is never seen,
+  producing a blue strip in the 3-D cylinder coverage map.
 
 Mesh resolution
   GZ_SIM_RESOURCE_PATH must include the package share directory so Gazebo
@@ -90,18 +87,17 @@ Mesh resolution
     </model>
 
     <!--
-      Rock obstacle — right half of pipe cross-section, x in [1.30, 1.70] m.
-      Box: centre (1.50, -0.075, 0), size 0.40 x 0.13 x 0.30 m.
-        y spans [-0.14, -0.01]: right half with 1 cm gap at centreline.
-        x spans [1.30, 1.70]:   0.40 m thick prevents robot from phasing through.
+      Sphere obstacle — centred in the pipe cross-section at x=1.5 m.
+      Radius 0.04 m.  Robot swerves LEFT (y > 0) to pass; right side of the
+      pipe wall near x=1.5 is never seen by the camera -> blue in 3-D render.
     -->
-    <model name="rock">
+    <model name="sphere">
       <static>true</static>
-      <pose>1.50 -0.075 0  0 0 0</pose>
+      <pose>1.5 0 0  0 0 0</pose>
       <link name="link">
         <collision name="col">
           <geometry>
-            <box><size>0.40 0.13 0.30</size></box>
+            <sphere><radius>0.04</radius></sphere>
           </geometry>
           <surface>
             <friction><ode><mu>0.6</mu><mu2>0.6</mu2></ode></friction>
@@ -112,11 +108,11 @@ Mesh resolution
         </collision>
         <visual name="vis">
           <geometry>
-            <box><size>0.40 0.13 0.30</size></box>
+            <sphere><radius>0.04</radius></sphere>
           </geometry>
           <material>
-            <ambient>0.35 0.28 0.18 1</ambient>
-            <diffuse>0.45 0.35 0.22 1</diffuse>
+            <ambient>0.30 0.20 0.10 1</ambient>
+            <diffuse>0.40 0.28 0.14 1</diffuse>
             <specular>0.05 0.04 0.02 1</specular>
             <emissive>0.0 0.0 0.0 1</emissive>
           </material>

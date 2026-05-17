@@ -211,6 +211,8 @@ def process_video(video_path: str, outer_fraction: float) -> tuple:
     snapshots: list = []
     frames_read    = 0
 
+
+
     for idx in range(total_frames):
         ret, frame = cap.read()
         if not ret:

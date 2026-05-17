@@ -44,10 +44,13 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 
 # --------------------------------------------------------------------------- #
-# Rock specification — one obstacle on the right half at x=1.5 m.
-# Matches pipe.world; forwarded to synthetic_camera_node + auto_drive_node.
+# Sphere obstacle — centred in the pipe cross-section at x=1.5 m, r=0.04 m.
+# Robot dodges LEFT (y > 0); right side of pipe wall near x=1.5 is missed.
+# _WALLS drives auto_drive_node to swerve left at x=1.5 (same sign as "right").
+# _SPHERE is forwarded to synthetic_camera_node for ray-sphere intersection.
 # --------------------------------------------------------------------------- #
-_WALLS = "1.5:right"
+_WALLS  = "1.5:right"      # auto_drive: dodge left at x=1.5 m
+_SPHERE = "1.5:0.04"       # camera: sphere at x=1.5, radius 0.04 m
 
 
 # --------------------------------------------------------------------------- #
@@ -213,8 +216,8 @@ def launch_setup(context, *args, **kwargs):
         parameters=[
             {"pipe_length":  pipe_length},
             {"drive_speed":  0.10},
-            {"y_offset":     0.04},   # reduced: keeps robot clear of pipe wall
-            {"avoid_range":  0.30},   # reduced: avoidance zone tighter around rock
+            {"y_offset":     0.08},   # clear sphere at centre: robot at y=+0.08 m
+            {"avoid_range":  0.30},
             {"kp_y":         6.0},
             {"omega_max":    0.40},
             {"cmd_rate_hz":  10.0},
@@ -225,19 +228,18 @@ def launch_setup(context, *args, **kwargs):
     )
 
     # ------------------------------------------------------------------ #
-    # 9. synthetic_camera_node — with half-disc wall obstacles
+    # 9. synthetic_camera_node — with sphere obstacle
     # ------------------------------------------------------------------ #
     synthetic_camera = Node(
         package="pipe_simulation",
         executable="synthetic_camera_node",
         name="synthetic_camera_node",
         parameters=[
-            {"pipe_radius":      pipe_radius},
-            {"image_size":       320},
-            {"update_rate_hz":   10.0},
-            {"use_sim_time":     use_sim_time},
-            {"walls":            _WALLS},
-            {"rock_half_length": 0.20},  # rock extends ±0.20 m from x_wall in X
+            {"pipe_radius":       pipe_radius},
+            {"image_size":        320},
+            {"update_rate_hz":    10.0},
+            {"use_sim_time":      use_sim_time},
+            {"sphere_obstacles":  _SPHERE},  # "x:radius" centred in cross-section
         ],
         output="screen",
     )

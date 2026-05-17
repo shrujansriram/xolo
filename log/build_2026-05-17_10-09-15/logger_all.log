@@ -1,0 +1,206 @@
+[1.344s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--packages-select', 'pipe_simulation', 'pipe_perception']
+[1.344s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=8, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['pipe_simulation', 'pipe_perception'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7d473821f6d0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7d473821f1c0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7d473821f1c0>>)
+[2.308s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[2.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[2.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[2.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[2.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[2.309s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[2.309s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/shrujans/xolo'
+[2.309s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[2.309s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[2.309s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[2.309s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[2.309s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[2.309s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[2.309s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[2.309s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[2.310s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[2.344s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[2.345s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[2.345s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[2.345s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[2.345s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[2.346s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extensions ['ignore', 'ignore_ament_install']
+[2.346s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extension 'ignore'
+[2.346s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extension 'ignore_ament_install'
+[2.346s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extensions ['colcon_pkg']
+[2.346s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extension 'colcon_pkg'
+[2.346s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extensions ['colcon_meta']
+[2.346s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extension 'colcon_meta'
+[2.346s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extensions ['ros']
+[2.346s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extension 'ros'
+[2.347s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extensions ['cmake', 'python']
+[2.347s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extension 'cmake'
+[2.347s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extension 'python'
+[2.347s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extensions ['python_setup_py']
+[2.347s] Level 1:colcon.colcon_core.package_identification:_identify(__pycache__) by extension 'python_setup_py'
+[2.348s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[2.348s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[2.348s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[2.350s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[2.350s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[2.350s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[2.351s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[2.351s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[2.351s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[2.351s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[2.351s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[2.352s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[2.352s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[2.352s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[2.352s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[2.352s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[2.352s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[2.352s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[2.352s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[2.352s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[2.352s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[2.352s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[2.352s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[2.353s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_perception) by extensions ['ignore', 'ignore_ament_install']
+[2.353s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_perception) by extension 'ignore'
+[2.353s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_perception) by extension 'ignore_ament_install'
+[2.354s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_perception) by extensions ['colcon_pkg']
+[2.354s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_perception) by extension 'colcon_pkg'
+[2.354s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_perception) by extensions ['colcon_meta']
+[2.354s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_perception) by extension 'colcon_meta'
+[2.354s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_perception) by extensions ['ros']
+[2.354s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_perception) by extension 'ros'
+[2.362s] DEBUG:colcon.colcon_core.package_identification:Package 'src/pipe_perception' with type 'ros.ament_python' and name 'pipe_perception'
+[2.363s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_simulation) by extensions ['ignore', 'ignore_ament_install']
+[2.363s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_simulation) by extension 'ignore'
+[2.363s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_simulation) by extension 'ignore_ament_install'
+[2.363s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_simulation) by extensions ['colcon_pkg']
+[2.363s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_simulation) by extension 'colcon_pkg'
+[2.363s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_simulation) by extensions ['colcon_meta']
+[2.363s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_simulation) by extension 'colcon_meta'
+[2.363s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_simulation) by extensions ['ros']
+[2.363s] Level 1:colcon.colcon_core.package_identification:_identify(src/pipe_simulation) by extension 'ros'
+[2.366s] DEBUG:colcon.colcon_core.package_identification:Package 'src/pipe_simulation' with type 'ros.ament_python' and name 'pipe_simulation'
+[2.366s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extensions ['ignore', 'ignore_ament_install']
+[2.366s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extension 'ignore'
+[2.366s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extension 'ignore_ament_install'
+[2.366s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extensions ['colcon_pkg']
+[2.367s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extension 'colcon_pkg'
+[2.367s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extensions ['colcon_meta']
+[2.367s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extension 'colcon_meta'
+[2.367s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extensions ['ros']
+[2.367s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extension 'ros'
+[2.367s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extensions ['cmake', 'python']
+[2.367s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extension 'cmake'
+[2.367s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extension 'python'
+[2.367s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extensions ['python_setup_py']
+[2.368s] Level 1:colcon.colcon_core.package_identification:_identify(videos) by extension 'python_setup_py'
+[2.368s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[2.368s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[2.368s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[2.368s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[2.368s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[2.440s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[2.440s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[2.454s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 287 installed packages in /opt/ros/humble
+[2.472s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[2.530s] Level 5:colcon.colcon_core.verb:set package 'pipe_perception' build argument 'cmake_args' from command line to 'None'
+[2.530s] Level 5:colcon.colcon_core.verb:set package 'pipe_perception' build argument 'cmake_target' from command line to 'None'
+[2.530s] Level 5:colcon.colcon_core.verb:set package 'pipe_perception' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.530s] Level 5:colcon.colcon_core.verb:set package 'pipe_perception' build argument 'cmake_clean_cache' from command line to 'False'
+[2.530s] Level 5:colcon.colcon_core.verb:set package 'pipe_perception' build argument 'cmake_clean_first' from command line to 'False'
+[2.530s] Level 5:colcon.colcon_core.verb:set package 'pipe_perception' build argument 'cmake_force_configure' from command line to 'False'
+[2.530s] Level 5:colcon.colcon_core.verb:set package 'pipe_perception' build argument 'ament_cmake_args' from command line to 'None'
+[2.530s] Level 5:colcon.colcon_core.verb:set package 'pipe_perception' build argument 'catkin_cmake_args' from command line to 'None'
+[2.530s] Level 5:colcon.colcon_core.verb:set package 'pipe_perception' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.531s] DEBUG:colcon.colcon_core.verb:Building package 'pipe_perception' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/shrujans/xolo/build/pipe_perception', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/shrujans/xolo/install/pipe_perception', 'merge_install': False, 'path': '/home/shrujans/xolo/src/pipe_perception', 'symlink_install': False, 'test_result_base': None}
+[2.531s] Level 5:colcon.colcon_core.verb:set package 'pipe_simulation' build argument 'cmake_args' from command line to 'None'
+[2.531s] Level 5:colcon.colcon_core.verb:set package 'pipe_simulation' build argument 'cmake_target' from command line to 'None'
+[2.531s] Level 5:colcon.colcon_core.verb:set package 'pipe_simulation' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.531s] Level 5:colcon.colcon_core.verb:set package 'pipe_simulation' build argument 'cmake_clean_cache' from command line to 'False'
+[2.531s] Level 5:colcon.colcon_core.verb:set package 'pipe_simulation' build argument 'cmake_clean_first' from command line to 'False'
+[2.531s] Level 5:colcon.colcon_core.verb:set package 'pipe_simulation' build argument 'cmake_force_configure' from command line to 'False'
+[2.531s] Level 5:colcon.colcon_core.verb:set package 'pipe_simulation' build argument 'ament_cmake_args' from command line to 'None'
+[2.531s] Level 5:colcon.colcon_core.verb:set package 'pipe_simulation' build argument 'catkin_cmake_args' from command line to 'None'
+[2.531s] Level 5:colcon.colcon_core.verb:set package 'pipe_simulation' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.531s] DEBUG:colcon.colcon_core.verb:Building package 'pipe_simulation' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/shrujans/xolo/build/pipe_simulation', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/shrujans/xolo/install/pipe_simulation', 'merge_install': False, 'path': '/home/shrujans/xolo/src/pipe_simulation', 'symlink_install': False, 'test_result_base': None}
+[2.532s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[2.533s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[2.533s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/shrujans/xolo/src/pipe_perception' with build type 'ament_python'
+[2.534s] Level 1:colcon.colcon_core.shell:create_environment_hook('pipe_perception', 'ament_prefix_path')
+[2.548s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[2.548s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shrujans/xolo/install/pipe_perception/share/pipe_perception/hook/ament_prefix_path.ps1'
+[2.552s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shrujans/xolo/install/pipe_perception/share/pipe_perception/hook/ament_prefix_path.dsv'
+[2.553s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shrujans/xolo/install/pipe_perception/share/pipe_perception/hook/ament_prefix_path.sh'
+[2.555s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.555s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.560s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/shrujans/xolo/src/pipe_simulation' with build type 'ament_python'
+[2.560s] Level 1:colcon.colcon_core.shell:create_environment_hook('pipe_simulation', 'ament_prefix_path')
+[2.560s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/hook/ament_prefix_path.ps1'
+[2.563s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/hook/ament_prefix_path.dsv'
+[2.565s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/hook/ament_prefix_path.sh'
+[2.566s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.566s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.998s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/shrujans/xolo/src/pipe_perception'
+[2.999s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.999s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[3.415s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/shrujans/xolo/src/pipe_simulation'
+[3.416s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.416s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.481s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shrujans/xolo/src/pipe_perception': PYTHONPATH=/home/shrujans/xolo/build/pipe_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_perception build --build-base /home/shrujans/xolo/build/pipe_perception/build install --record /home/shrujans/xolo/build/pipe_perception/install.log --single-version-externally-managed install_data
+[4.484s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shrujans/xolo/src/pipe_simulation': PYTHONPATH=/home/shrujans/xolo/build/pipe_simulation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_simulation build --build-base /home/shrujans/xolo/build/pipe_simulation/build install --record /home/shrujans/xolo/build/pipe_simulation/install.log --single-version-externally-managed install_data
+[4.922s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shrujans/xolo/src/pipe_simulation' returned '0': PYTHONPATH=/home/shrujans/xolo/build/pipe_simulation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_simulation build --build-base /home/shrujans/xolo/build/pipe_simulation/build install --record /home/shrujans/xolo/build/pipe_simulation/install.log --single-version-externally-managed install_data
+[4.942s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_simulation' for CMake module files
+[4.944s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_simulation' for CMake config files
+[4.958s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_simulation/lib'
+[4.959s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_simulation/bin'
+[4.959s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_simulation/lib/pkgconfig/pipe_simulation.pc'
+[4.959s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages'
+[4.959s] Level 1:colcon.colcon_core.shell:create_environment_hook('pipe_simulation', 'pythonpath')
+[4.960s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/hook/pythonpath.ps1'
+[4.961s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/hook/pythonpath.dsv'
+[4.961s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/hook/pythonpath.sh'
+[4.962s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_simulation/bin'
+[4.963s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(pipe_simulation)
+[4.963s] INFO:colcon.colcon_core.shell:Creating package script '/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/package.ps1'
+[4.967s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/package.dsv'
+[4.970s] INFO:colcon.colcon_core.shell:Creating package script '/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/package.sh'
+[4.971s] INFO:colcon.colcon_core.shell:Creating package script '/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/package.bash'
+[4.973s] INFO:colcon.colcon_core.shell:Creating package script '/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/package.zsh'
+[4.975s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shrujans/xolo/install/pipe_simulation/share/colcon-core/packages/pipe_simulation)
+[4.977s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_perception' for CMake module files
+[4.977s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shrujans/xolo/src/pipe_perception' returned '0': PYTHONPATH=/home/shrujans/xolo/build/pipe_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_perception build --build-base /home/shrujans/xolo/build/pipe_perception/build install --record /home/shrujans/xolo/build/pipe_perception/install.log --single-version-externally-managed install_data
+[4.979s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_perception' for CMake config files
+[4.995s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_perception/lib'
+[4.995s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_perception/bin'
+[4.995s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_perception/lib/pkgconfig/pipe_perception.pc'
+[4.996s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages'
+[4.996s] Level 1:colcon.colcon_core.shell:create_environment_hook('pipe_perception', 'pythonpath')
+[4.996s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shrujans/xolo/install/pipe_perception/share/pipe_perception/hook/pythonpath.ps1'
+[4.997s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shrujans/xolo/install/pipe_perception/share/pipe_perception/hook/pythonpath.dsv'
+[4.997s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shrujans/xolo/install/pipe_perception/share/pipe_perception/hook/pythonpath.sh'
+[4.998s] Level 1:colcon.colcon_core.environment:checking '/home/shrujans/xolo/install/pipe_perception/bin'
+[4.998s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(pipe_perception)
+[4.999s] INFO:colcon.colcon_core.shell:Creating package script '/home/shrujans/xolo/install/pipe_perception/share/pipe_perception/package.ps1'
+[5.000s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shrujans/xolo/install/pipe_perception/share/pipe_perception/package.dsv'
+[5.002s] INFO:colcon.colcon_core.shell:Creating package script '/home/shrujans/xolo/install/pipe_perception/share/pipe_perception/package.sh'
+[5.003s] INFO:colcon.colcon_core.shell:Creating package script '/home/shrujans/xolo/install/pipe_perception/share/pipe_perception/package.bash'
+[5.004s] INFO:colcon.colcon_core.shell:Creating package script '/home/shrujans/xolo/install/pipe_perception/share/pipe_perception/package.zsh'
+[5.004s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shrujans/xolo/install/pipe_perception/share/colcon-core/packages/pipe_perception)
+[5.005s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[5.005s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[5.006s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[5.006s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[5.363s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[5.363s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[5.363s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[5.363s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[5.363s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.FileNotFound: Failed to connect to socket /run/user/1000/bus: No such file or directory
+[5.364s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[5.364s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shrujans/xolo/install/local_setup.ps1'
+[5.373s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/shrujans/xolo/install/_local_setup_util_ps1.py'
+[5.376s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shrujans/xolo/install/setup.ps1'
+[5.378s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shrujans/xolo/install/local_setup.sh'
+[5.380s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/shrujans/xolo/install/_local_setup_util_sh.py'
+[5.381s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shrujans/xolo/install/setup.sh'
+[5.383s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shrujans/xolo/install/local_setup.bash'
+[5.384s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shrujans/xolo/install/setup.bash'
+[5.387s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shrujans/xolo/install/local_setup.zsh'
+[5.389s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shrujans/xolo/install/setup.zsh'
