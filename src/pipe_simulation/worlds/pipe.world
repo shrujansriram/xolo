@@ -2,64 +2,47 @@
 <!--
 pipe.world
 ----------
-Gazebo Harmonic (gz-sim 8) world containing a single hollow pipe and a
-spawn point for the pipe_bot robot.
+Gazebo Harmonic (gz-sim 8) world — straight hollow pipe with one
+volumetric rock obstacle blocking the right half of the cross-section.
 
 Coordinate frame
-  World Z = up (Gazebo default gravity = -Z).
-  The pipe mesh is generated in WORLD coordinates by generate_curved_pipe_mesh.py
-  at launch time (via OpaqueFunction in sim.launch.py).  No rotation is needed.
+  World Z = up.  Pipe along +X.
+  Robot spawn: x=0.05  y=0  z=-0.115  (wheels rest at z=-0.15)
 
-  For the default 90-degree arc (pipe_length=4.5 m, bend_angle_deg=90):
-    Pipe enters at world origin going in +X direction
-    Pipe curves in the horizontal XY plane
-    Pipe floor (inner bottom) : world Z = -0.15 m everywhere along the arc
-    Robot spawn : x=0.3  y=0  z=-0.115  (wheels rest at z=-0.15)
+Rock obstacle
+  x in [1.30, 1.70] m  (0.40 m thick - prevents robot from phasing through)
+  y in [-0.14, -0.01] m  (right half of cross-section, 1 cm gap at y=0)
+  z in [-0.15, +0.15] m  (full pipe height)
+
+  Gazebo model: box centred at (1.50, -0.075, 0), size 0.40 x 0.13 x 0.30 m.
+
+The robot swerves LEFT (y > 0) to avoid the rock.  The pipe wall on the
+right side (y < 0) within x in [1.30, 1.70] is never inspected, producing
+a blue strip in the 3-D cylinder coverage map.
 
 Mesh resolution
   GZ_SIM_RESOURCE_PATH must include the package share directory so Gazebo
-  can resolve the bare URI  meshes/pipe_hollow.stl.
-  The launch file sets this env var before starting gz sim.
+  can resolve  meshes/pipe_hollow.stl.  Set by sim.launch.py.
 -->
 <sdf version="1.10">
   <world name="pipe_world">
 
-    <!-- ============================================================== -->
-    <!-- World-level system plugins required by Gazebo Harmonic          -->
-    <!-- ============================================================== -->
-
-    <!-- Physics step integration -->
+    <!-- System plugins -->
     <plugin filename="gz-sim-physics-system"
             name="gz::sim::systems::Physics"/>
-
-    <!-- Allows spawning / deleting models at runtime (used by launch) -->
     <plugin filename="gz-sim-user-commands-system"
             name="gz::sim::systems::UserCommands"/>
-
-    <!-- Broadcasts scene state to gz-transport (needed by GUI and bridge) -->
     <plugin filename="gz-sim-scene-broadcaster-system"
             name="gz::sim::systems::SceneBroadcaster"/>
-
-    <!-- NOTE: gz-sim-sensors-system (Ogre2) is intentionally omitted.
-         Camera images are provided by synthetic_camera_node (ROS2).
-         This avoids the Ogre2 Fixed-Function-Pipeline crash on WSL2
-         software rendering (EGL_MESA_device_software). -->
-
-    <!-- IMU sensor integration -->
     <plugin filename="gz-sim-imu-system"
             name="gz::sim::systems::Imu"/>
 
-    <!-- ============================================================== -->
-    <!-- Scene: dark ambient to simulate an unlit industrial pipe        -->
-    <!-- ============================================================== -->
+    <!-- Scene -->
     <scene>
-      <!-- Moderate ambient so camera sees pipe interior without a headlight -->
       <ambient>0.6 0.6 0.6 1.0</ambient>
       <background>0.05 0.05 0.05 1.0</background>
       <shadows>false</shadows>
     </scene>
-
-    <!-- Directional light to illuminate pipe interior for the camera -->
     <light name="ambient_sun" type="directional">
       <pose>0 0 10 0 0 0</pose>
       <diffuse>0.8 0.8 0.8 1</diffuse>
@@ -68,22 +51,11 @@ Mesh resolution
       <cast_shadows>false</cast_shadows>
     </light>
 
-    <!-- ============================================================== -->
-    <!-- Pipe model                                                       -->
-    <!--                                                                  -->
-    <!-- The binary STL pipe_hollow.stl is regenerated at launch time    -->
-    <!-- (see sim.launch.py OpaqueFunction) in world coordinates.        -->
-    <!-- Identity pose — no rotation needed.                             -->
-    <!-- ============================================================== -->
+    <!-- Pipe mesh -->
     <model name="pipe">
       <static>true</static>
-      <!-- x y z  roll pitch yaw — identity: mesh already in world coords -->
       <pose>0 0 0  0 0 0</pose>
-
       <link name="pipe_link">
-
-        <!-- Collision geometry — robot wheels and body collide with the
-             inner surface (inward-pointing normals in the STL).         -->
         <collision name="pipe_collision">
           <geometry>
             <mesh>
@@ -93,22 +65,13 @@ Mesh resolution
           </geometry>
           <surface>
             <friction>
-              <ode>
-                <!-- Concrete-like friction — good wheel traction -->
-                <mu>0.8</mu>
-                <mu2>0.8</mu2>
-              </ode>
+              <ode><mu>0.8</mu><mu2>0.8</mu2></ode>
             </friction>
             <contact>
-              <ode>
-                <kp>1000000.0</kp>
-                <kd>1.0</kd>
-              </ode>
+              <ode><kp>1000000.0</kp><kd>1.0</kd></ode>
             </contact>
           </surface>
         </collision>
-
-        <!-- Visual geometry — concrete-grey material -->
         <visual name="pipe_visual">
           <geometry>
             <mesh>
@@ -117,14 +80,47 @@ Mesh resolution
             </mesh>
           </geometry>
           <material>
-            <!-- Concrete / cast-iron grey -->
             <ambient>0.40 0.38 0.35 1</ambient>
             <diffuse>0.50 0.48 0.44 1</diffuse>
             <specular>0.08 0.08 0.08 1</specular>
             <emissive>0.0 0.0 0.0 1</emissive>
           </material>
         </visual>
+      </link>
+    </model>
 
+    <!--
+      Rock obstacle — right half of pipe cross-section, x in [1.30, 1.70] m.
+      Box: centre (1.50, -0.075, 0), size 0.40 x 0.13 x 0.30 m.
+        y spans [-0.14, -0.01]: right half with 1 cm gap at centreline.
+        x spans [1.30, 1.70]:   0.40 m thick prevents robot from phasing through.
+    -->
+    <model name="rock">
+      <static>true</static>
+      <pose>1.50 -0.075 0  0 0 0</pose>
+      <link name="link">
+        <collision name="col">
+          <geometry>
+            <box><size>0.40 0.13 0.30</size></box>
+          </geometry>
+          <surface>
+            <friction><ode><mu>0.6</mu><mu2>0.6</mu2></ode></friction>
+            <contact>
+              <ode><kp>1000000.0</kp><kd>1.0</kd></ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="vis">
+          <geometry>
+            <box><size>0.40 0.13 0.30</size></box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.28 0.18 1</ambient>
+            <diffuse>0.45 0.35 0.22 1</diffuse>
+            <specular>0.05 0.04 0.02 1</specular>
+            <emissive>0.0 0.0 0.0 1</emissive>
+          </material>
+        </visual>
       </link>
     </model>
 

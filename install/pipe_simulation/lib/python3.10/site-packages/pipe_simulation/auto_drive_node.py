@@ -1,39 +1,53 @@
 """
 auto_drive_node.py
 ------------------
-Drives the pipe_bot through an L-shaped path:
+Drives the pipe_bot through a straight pipe while smoothly manoeuvring
+around half-disc wall obstacles.
 
-    FORWARD_1  — travel leg1_m metres straight ahead
-    PAUSE      — hold position for pause_s seconds
-    TURN_LEFT  — rotate CCW by turn_deg degrees in place
-    FORWARD_2  — travel leg2_m metres straight ahead
-    DONE       — stop permanently
+Physics rationale
+-----------------
+Each wall blocks exactly half the pipe cross-section (y > 0 for "left" walls,
+y < 0 for "right" walls).  The robot must swing laterally to the clear half
+before reaching the wall, pass through, then return to the centreline.
+
+A proportional Y-tracking controller handles this continuously:
+
+  y_desired(x) = Σ  sign_i · y_offset · bell(x, x_wall_i, avoid_range)
+
+where bell is a raised-cosine bump centred on x_wall_i:
+  bell(x) = 0.5 · (1 + cos(π · (x − x_wall) / avoid_range))
+             for |x − x_wall| < avoid_range, else 0
+
+  sign = −1 for a left-blocking wall (robot dodges right, y < 0)
+  sign = +1 for a right-blocking wall (robot dodges left, y > 0)
+
+The angular command is:
+  ω = clamp(Kp · (y_desired − y_actual),  −ω_max, +ω_max)
+
+State machine:  INIT → DRIVING → DONE
 
 Parameters (ROS2)
-  leg1_m       — first straight section length [m]     (default 2.0)
-  pause_s      — stop duration between legs [s]        (default 2.0)
-  turn_deg     — CCW turn angle in degrees             (default 90.0)
-  leg2_m       — second straight section length [m]    (default 2.0)
-  drive_speed  — forward speed [m/s]                   (default 0.10)
-  turn_speed   — angular speed [rad/s]                 (default 0.40)
-  cmd_rate_hz  — cmd_vel publish rate [Hz]             (default 10.0)
+  pipe_length  — robot drives until x ≥ pipe_length − 0.10 m   (default 3.0)
+  drive_speed  — forward speed [m/s]                             (default 0.10)
+  y_offset     — peak lateral offset to clear the wall edge [m]  (default 0.07)
+  avoid_range  — half-width of avoidance bell around each wall   (default 0.35)
+  kp_y         — proportional gain for lateral tracking          (default 6.0)
+  omega_max    — maximum angular velocity [rad/s]                (default 0.40)
+  cmd_rate_hz  — publish rate [Hz]                               (default 10.0)
+  walls        — comma-separated "x:side" descriptors
+                 e.g. "0.2:left,1.2:left,1.9:right,2.6:right"
 """
 
 import math
-import time
 
 import rclpy
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from rclpy.node import Node
 
-# State machine states
-_INIT      = "INIT"
-_FORWARD_1 = "FORWARD_1"
-_PAUSE     = "PAUSE"
-_TURN_LEFT = "TURN_LEFT"
-_FORWARD_2 = "FORWARD_2"
-_DONE      = "DONE"
+_INIT    = "INIT"
+_DRIVING = "DRIVING"
+_DONE    = "DONE"
 
 
 class AutoDrive(Node):
@@ -43,36 +57,42 @@ class AutoDrive(Node):
         # ------------------------------------------------------------------ #
         # ROS2 parameters
         # ------------------------------------------------------------------ #
-        self.declare_parameter("leg1_m",       2.0)
-        self.declare_parameter("pause_s",      2.0)
-        self.declare_parameter("turn_deg",    90.0)
-        self.declare_parameter("leg2_m",       2.0)
+        self.declare_parameter("pipe_length",  3.0)
         self.declare_parameter("drive_speed",  0.10)
-        self.declare_parameter("turn_speed",   0.40)
-        self.declare_parameter("cmd_rate_hz", 10.0)
+        self.declare_parameter("y_offset",     0.07)
+        self.declare_parameter("avoid_range",  0.35)
+        self.declare_parameter("kp_y",         6.0)
+        self.declare_parameter("omega_max",    0.40)
+        self.declare_parameter("cmd_rate_hz",  10.0)
+        self.declare_parameter("walls",        "")
 
-        self._leg1_m      = float(self.get_parameter("leg1_m").value)
-        self._pause_s     = float(self.get_parameter("pause_s").value)
-        self._turn_rad    = math.radians(float(self.get_parameter("turn_deg").value))
-        self._leg2_m      = float(self.get_parameter("leg2_m").value)
+        self._pipe_length = float(self.get_parameter("pipe_length").value)
         self._drive_speed = float(self.get_parameter("drive_speed").value)
-        self._turn_speed  = float(self.get_parameter("turn_speed").value)
+        self._y_offset    = float(self.get_parameter("y_offset").value)
+        self._avoid_range = float(self.get_parameter("avoid_range").value)
+        self._kp_y        = float(self.get_parameter("kp_y").value)
+        self._omega_max   = float(self.get_parameter("omega_max").value)
         self._rate_hz     = float(self.get_parameter("cmd_rate_hz").value)
 
-        # ------------------------------------------------------------------ #
-        # State machine
-        # ------------------------------------------------------------------ #
-        self._state: str = _INIT
+        # Parse wall descriptors: "x:side,..."
+        # sign = −1 for left walls (dodge right, y<0)
+        # sign = +1 for right walls (dodge left, y>0)
+        walls_str = str(self.get_parameter("walls").value).strip()
+        self._wall_info: list = []   # (x_wall, sign)
+        if walls_str:
+            for part in walls_str.split(","):
+                part = part.strip()
+                if ":" in part:
+                    x_str, side = part.split(":", 1)
+                    sign = -1.0 if side.strip() == "left" else +1.0
+                    self._wall_info.append((float(x_str.strip()), sign))
 
-        # Odometry tracking
-        self._last_x:    float | None = None
-        self._last_y:    float | None = None
-        self._yaw:       float        = 0.0   # current heading [rad]
-        self._distance:  float        = 0.0   # accumulated travel in current phase
-
-        # Phase bookkeeping
-        self._pause_start:    float | None = None   # wall-clock time when pause began
-        self._yaw_turn_start: float | None = None   # heading at start of turn
+        # ------------------------------------------------------------------ #
+        # State
+        # ------------------------------------------------------------------ #
+        self._state   = _INIT
+        self._robot_x = 0.0
+        self._robot_y = 0.0
 
         # ------------------------------------------------------------------ #
         # ROS2 I/O
@@ -85,103 +105,81 @@ class AutoDrive(Node):
             1.0 / self._rate_hz, self._publish_cmd
         )
 
+        walls_desc = (
+            ", ".join(f"x={x:.2f}({'L' if s < 0 else 'R'})" for x, s in self._wall_info)
+            or "none"
+        )
         self.get_logger().info(
-            f"auto_drive_node ready — L-path: "
-            f"forward {self._leg1_m} m → pause {self._pause_s} s → "
-            f"turn {math.degrees(self._turn_rad):.0f}° → "
-            f"forward {self._leg2_m} m"
+            f"auto_drive_node ready — straight drive {self._pipe_length - 0.10:.2f} m, "
+            f"walls: [{walls_desc}], "
+            f"y_offset={self._y_offset} m, avoid_range={self._avoid_range} m"
         )
 
     # ---------------------------------------------------------------------- #
-    # Odometry callback — maintain position + accumulated distance + yaw
+    # Odometry callback
     # ---------------------------------------------------------------------- #
 
     def _odom_callback(self, msg: Odometry) -> None:
-        x = msg.pose.pose.position.x
-        y = msg.pose.pose.position.y
-        q = msg.pose.pose.orientation
-        self._yaw = math.atan2(
-            2.0 * (q.w * q.z + q.x * q.y),
-            1.0 - 2.0 * (q.y * q.y + q.z * q.z),
-        )
+        self._robot_x = msg.pose.pose.position.x
+        self._robot_y = msg.pose.pose.position.y
 
         if self._state == _INIT:
-            self._last_x = x
-            self._last_y = y
-            self._state  = _FORWARD_1
+            self._state = _DRIVING
             self.get_logger().info(
-                f"Odometry ready — starting FORWARD_1 ({self._leg1_m} m)"
+                f"Odometry received — DRIVING (stopping at x≥"
+                f"{self._pipe_length - 0.10:.2f} m)"
             )
-            return
-
-        if self._last_x is None:
-            return
-
-        step = math.hypot(x - self._last_x, y - self._last_y)
-        self._distance += step
-        self._last_x    = x
-        self._last_y    = y
 
     # ---------------------------------------------------------------------- #
-    # Timer callback — state machine logic
+    # Desired Y trajectory
+    # ---------------------------------------------------------------------- #
+
+    def _desired_y(self, x: float) -> float:
+        """
+        Target lateral position (metres) at pipe-axis position x.
+
+        Each wall contributes a raised-cosine bell offset centred on
+        x_wall with half-width avoid_range.  Left walls drive the robot
+        to y < 0 (clear the +Y blockage); right walls to y > 0.
+
+        Overlapping bells sum — walls are positioned to avoid overlap.
+        """
+        y_des = 0.0
+        for x_wall, sign in self._wall_info:
+            t = (x - x_wall) / self._avoid_range
+            if abs(t) < 1.0:
+                bell = 0.5 * (1.0 + math.cos(math.pi * t))
+                y_des += sign * self._y_offset * bell
+        return y_des
+
+    # ---------------------------------------------------------------------- #
+    # Timer callback — publish velocity commands
     # ---------------------------------------------------------------------- #
 
     def _publish_cmd(self) -> None:
         cmd = Twist()   # default: zero velocity
 
         if self._state == _INIT:
-            # Waiting for first odometry message — publish zero and wait
             self._pub.publish(cmd)
             return
 
-        if self._state == _FORWARD_1:
-            if self._distance >= self._leg1_m:
-                self._distance      = 0.0
-                self._pause_start   = time.monotonic()
-                self._state         = _PAUSE
-                self.get_logger().info(
-                    f"Leg 1 complete ({self._leg1_m} m) — pausing "
-                    f"{self._pause_s} s"
-                )
-            else:
-                cmd.linear.x = self._drive_speed
-
-        elif self._state == _PAUSE:
-            elapsed = time.monotonic() - self._pause_start
-            if elapsed >= self._pause_s:
-                self._yaw_turn_start = self._yaw
-                self._state          = _TURN_LEFT
-                self.get_logger().info(
-                    f"Pause complete — turning "
-                    f"{math.degrees(self._turn_rad):.0f}° CCW"
-                )
-            # cmd stays zero (hold position)
-
-        elif self._state == _TURN_LEFT:
-            # Wrap-safe angular displacement
-            delta = math.atan2(
-                math.sin(self._yaw - self._yaw_turn_start),
-                math.cos(self._yaw - self._yaw_turn_start),
-            )
-            if abs(delta) >= self._turn_rad:
-                self._distance = 0.0
-                self._state    = _FORWARD_2
-                self.get_logger().info(
-                    f"Turn complete — starting FORWARD_2 ({self._leg2_m} m)"
-                )
-            else:
-                cmd.angular.z = self._turn_speed
-
-        elif self._state == _FORWARD_2:
-            if self._distance >= self._leg2_m:
+        if self._state == _DRIVING:
+            stop_x = self._pipe_length - 0.10
+            if self._robot_x >= stop_x:
                 self._state = _DONE
                 self.get_logger().info(
-                    f"Leg 2 complete ({self._leg2_m} m) — stopped."
+                    f"Pipe end reached (x={self._robot_x:.3f} m) — DONE."
                 )
             else:
-                cmd.linear.x = self._drive_speed
+                y_des    = self._desired_y(self._robot_x)
+                y_err    = y_des - self._robot_y
+                omega    = self._kp_y * y_err
+                omega    = max(-self._omega_max, min(self._omega_max, omega))
 
-        # _DONE: cmd stays zero — robot is permanently stopped
+                cmd.linear.x  = self._drive_speed
+                cmd.angular.z = omega
+
+        # _DONE: cmd stays zero — robot permanently stopped
 
         self._pub.publish(cmd)
 

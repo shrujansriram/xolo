@@ -4,10 +4,10 @@ cylinder_visualizer_3d_node.py
 ROS2 node that converts the growing 2D coverage heatmap into a 3D
 cylindrical TRIANGLE_LIST Marker for display in RViz2.
 
-The cylinder shape follows the robot's actual trajectory from odometry.
-Cross-sections are placed at the (x, y, yaw) poses stored in
-/pipe/waypoints, so the 3D map accurately reflects where the robot
-physically travelled — including straight runs, corners, and bends.
+The pipe is straight along the +X axis.  Cross-sections are placed at
+the axial positions (x values) from /pipe/waypoints; y and yaw from
+odometry are ignored because the robot swerves laterally to avoid walls
+but the pipe itself does not bend.
 
 Subscriptions
 -------------
@@ -51,9 +51,9 @@ class CylinderVisualizer3DNode(Node):
     """
     Rebuilds the 3D cylinder marker on every coverage heatmap update.
 
-    The cylinder shape is driven by /pipe/waypoints (actual robot poses).
-    No arc geometry is hardcoded — the marker faithfully follows the path
-    the robot travelled, freezing cleanly when the robot stops.
+    Cross-section axial positions come from /pipe/waypoints; the cylinder
+    is always straight along +X (pipe centreline), so robot lateral
+    manoeuvres do not bend the 3D representation.
 
     Parameters (ROS2)
     -----------------
@@ -261,37 +261,36 @@ class CylinderVisualizer3DNode(Node):
 
     def _compute_vertex_grid_from_waypoints(self, h: int, w: int) -> np.ndarray:
         """
-        Place cylinder cross-sections at the robot's actual odometry poses.
+        Place cylinder cross-sections along the straight pipe axis (+X).
 
-        For each downsampled row i, the corresponding waypoint is looked up
-        by mapping back through the grid_step:
+        Only the axial position x_i is taken from each waypoint; the
+        cross-sections are always centred on the pipe centreline (y=0, z=0)
+        and perpendicular to +X.  The robot swerves laterally to avoid walls
+        but the pipe itself is straight — using (y_i, yaw_i) from odometry
+        would incorrectly bend the cylinder to match the robot's path.
+
+        For each downsampled row i:
             wp_idx = min(i * grid_step, n_waypoints - 1)
-
-        The cross-section at waypoint (x_i, y_i, yaw_i):
-            e_v = (0, 0, 1)                    — world vertical
-            e_h = (−sin(yaw), cos(yaw), 0)     — left of heading in XY
-            P(θ) = (x_i, y_i, 0) + r·(cos(θ)·e_v + sin(θ)·e_h)
-
-        This correctly handles straight sections, corners, and any arbitrary
-        path the robot follows.
+            P(θ)   = (x_i, r·sin θ, r·cos θ)
         """
         n_wp  = len(self._waypoints)
         step  = self._grid_step
         r     = self._pipe_radius
         theta = np.linspace(0.0, 2.0 * math.pi, w, endpoint=False)
 
+        sin_t = r * np.sin(theta)   # (w,) — Y coordinates of the ring
+        cos_t = r * np.cos(theta)   # (w,) — Z coordinates of the ring
+
         xs = np.zeros((h, w))
         ys = np.zeros((h, w))
         zs = np.zeros((h, w))
 
         for i in range(h):
-            wp_idx       = min(i * step, n_wp - 1)
-            x_i, y_i, yaw_i = self._waypoints[wp_idx]
-            eh_x = -math.sin(yaw_i)
-            eh_y =  math.cos(yaw_i)
-            xs[i] = x_i + r * np.sin(theta) * eh_x
-            ys[i] = y_i + r * np.sin(theta) * eh_y
-            zs[i] =       r * np.cos(theta)
+            wp_idx    = min(i * step, n_wp - 1)
+            x_i, _, _ = self._waypoints[wp_idx]    # only axial position used
+            xs[i] = x_i     # constant along the ring row
+            ys[i] = sin_t   # ring in YZ plane, centred on pipe axis
+            zs[i] = cos_t
 
         return np.stack([xs, ys, zs], axis=-1)
 

@@ -212,7 +212,9 @@ class CoverageMapperNode(Node):
         h = frame.shape[0]
         outer_start   = max(0, int(h * (1.0 - self._outer_frac)))
         outer_slice   = frame[outer_start:, :]      # (H*frac, 360, 3)
-        angular_coverage = np.any(outer_slice > 0, axis=(0, 2)).astype(np.uint8)
+        # Threshold > 30: rock pixels [22,14,8] (max=22) count as "not seen".
+        # Pipe-wall pixels in the outer ring have lum ~110-200 (always > 30).
+        angular_coverage = np.any(outer_slice > 30, axis=(0, 2)).astype(np.uint8)
 
         try:
             self._mapper.add_depth_slice(angular_coverage)
