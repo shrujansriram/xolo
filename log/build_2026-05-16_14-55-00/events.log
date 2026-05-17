@@ -1,0 +1,37 @@
+[0.000000] (-) TimerEvent: {}
+[0.000494] (-) JobUnselected: {'identifier': 'pipe_simulation'}
+[0.000521] (pipe_perception) JobQueued: {'identifier': 'pipe_perception', 'dependencies': OrderedDict()}
+[0.000536] (pipe_perception) JobStarted: {'identifier': 'pipe_perception'}
+[0.099358] (-) TimerEvent: {}
+[0.199565] (-) TimerEvent: {}
+[0.299770] (-) TimerEvent: {}
+[0.304734] (pipe_perception) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/pipe_perception', 'build', '--build-base', '/home/shrujans/xolo/build/pipe_perception/build', 'install', '--record', '/home/shrujans/xolo/build/pipe_perception/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/shrujans/xolo/src/pipe_perception', 'env': {'USER': 'shrujans', 'SHLVL': '0', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/shrujans', 'OLDPWD': '/home/shrujans/xolo', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'WSL_DISTRO_NAME': 'Ubuntu-22.04', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'humble', 'LOGNAME': 'shrujans', 'NAME': 'ShrujanLenovo1', 'WSL_INTEROP': '/run/WSL/8524_interop', 'PULSE_SERVER': 'unix:/mnt/wslg/PulseServer', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm-256color', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/home/shrujans/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/shruj/bin:/mnt/c/Program Files/Git/mingw64/bin:/mnt/c/Program Files/Git/usr/local/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Program Files/Git/mingw64/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Users/shruj/bin:/mnt/c/Python3.14/Scripts:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Windows/System32/OpenSSH:/mnt/c/Program Files/nodejs:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/CMake/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/Program Files/Amazon/AWSCLIV2:/mnt/c/Users/shruj/AppData/Local/Programs/Python/Python312/Scripts:/mnt/c/Users/shruj/AppData/Local/Programs/Python/Python312:/mnt/c/Python3.14/Scripts:/mnt/c/Python3.14:/mnt/c/Users/shruj/AppData/Local/Programs/Python/Launcher:/mnt/c/Users/shruj/.local/bin:/mnt/c/Users/shruj/AppData/Local/pnpm:/mnt/c/Users/shruj/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/shruj/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/shruj/AppData/Local/GitHubDesktop/bin:/mnt/c/Users/shruj/AppData/Roaming/npm:/mnt/c/Users/shruj/AppData/Local/Python/bin:/mnt/c/Program Files/Git/usr/bin/vendor_perl:/mnt/c/Program Files/Git/usr/bin/core_perl:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000/', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'AMENT_PREFIX_PATH': '/opt/ros/humble', 'SHELL': '/bin/bash', 'PWD': '/home/shrujans/xolo/build/pipe_perception', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/shrujans/xolo/build/pipe_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'WSL2_GUI_APPS_ENABLED': '1', 'HOSTTYPE': 'x86_64', 'WSLENV': 'ELECTRON_RUN_AS_NODE/w:'}, 'shell': False}
+[0.399889] (-) TimerEvent: {}
+[0.414953] (pipe_perception) StdoutLine: {'line': b'running egg_info\n'}
+[0.415337] (pipe_perception) StdoutLine: {'line': b'writing ../../build/pipe_perception/pipe_perception.egg-info/PKG-INFO\n'}
+[0.415563] (pipe_perception) StdoutLine: {'line': b'writing dependency_links to ../../build/pipe_perception/pipe_perception.egg-info/dependency_links.txt\n'}
+[0.415746] (pipe_perception) StdoutLine: {'line': b'writing entry points to ../../build/pipe_perception/pipe_perception.egg-info/entry_points.txt\n'}
+[0.415960] (pipe_perception) StdoutLine: {'line': b'writing requirements to ../../build/pipe_perception/pipe_perception.egg-info/requires.txt\n'}
+[0.416022] (pipe_perception) StdoutLine: {'line': b'writing top-level names to ../../build/pipe_perception/pipe_perception.egg-info/top_level.txt\n'}
+[0.417115] (pipe_perception) StdoutLine: {'line': b"reading manifest file '../../build/pipe_perception/pipe_perception.egg-info/SOURCES.txt'\n"}
+[0.417594] (pipe_perception) StdoutLine: {'line': b"writing manifest file '../../build/pipe_perception/pipe_perception.egg-info/SOURCES.txt'\n"}
+[0.417639] (pipe_perception) StdoutLine: {'line': b'running build\n'}
+[0.417676] (pipe_perception) StdoutLine: {'line': b'running build_py\n'}
+[0.418011] (pipe_perception) StdoutLine: {'line': b'copying pipe_perception/nodes/cylinder_visualizer_3d_node.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes\n'}
+[0.418786] (pipe_perception) StdoutLine: {'line': b'running install\n'}
+[0.419003] (pipe_perception) StdoutLine: {'line': b'running install_lib\n'}
+[0.419734] (pipe_perception) StdoutLine: {'line': b'copying /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes/cylinder_visualizer_3d_node.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes\n'}
+[0.420691] (pipe_perception) StdoutLine: {'line': b'byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes/cylinder_visualizer_3d_node.py to cylinder_visualizer_3d_node.cpython-310.pyc\n'}
+[0.422437] (pipe_perception) StdoutLine: {'line': b'running install_data\n'}
+[0.422603] (pipe_perception) StdoutLine: {'line': b'running install_egg_info\n'}
+[0.423613] (pipe_perception) StdoutLine: {'line': b"removing '/home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception-0.0.1-py3.10.egg-info' (and everything under it)\n"}
+[0.423915] (pipe_perception) StdoutLine: {'line': b'Copying ../../build/pipe_perception/pipe_perception.egg-info to /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception-0.0.1-py3.10.egg-info\n'}
+[0.424436] (pipe_perception) StdoutLine: {'line': b'running install_scripts\n'}
+[0.435488] (pipe_perception) StdoutLine: {'line': b'Installing coverage_mapper_node script to /home/shrujans/xolo/install/pipe_perception/lib/pipe_perception\n'}
+[0.435655] (pipe_perception) StdoutLine: {'line': b'Installing cylinder_unwrap_node script to /home/shrujans/xolo/install/pipe_perception/lib/pipe_perception\n'}
+[0.435785] (pipe_perception) StdoutLine: {'line': b'Installing cylinder_visualizer_3d_node script to /home/shrujans/xolo/install/pipe_perception/lib/pipe_perception\n'}
+[0.435816] (pipe_perception) StdoutLine: {'line': b'Installing video_ingest_node script to /home/shrujans/xolo/install/pipe_perception/lib/pipe_perception\n'}
+[0.435926] (pipe_perception) StdoutLine: {'line': b"writing list of installed files to '/home/shrujans/xolo/build/pipe_perception/install.log'\n"}
+[0.447264] (pipe_perception) CommandEnded: {'returncode': 0}
+[0.453006] (pipe_perception) JobEnded: {'identifier': 'pipe_perception', 'rc': 0}
+[0.453342] (-) EventReactorShutdown: {}

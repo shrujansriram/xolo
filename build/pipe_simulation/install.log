@@ -10,11 +10,14 @@
 /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/package.xml
 /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/launch/gazebo.launch.py
 /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/launch/sim.launch.py
+/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/launch/video_inspect.launch.py
 /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/urdf/pipe_bot.urdf.xacro
 /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/worlds/pipe.world
 /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/meshes/pipe_hollow.stl
 /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/config/bridge.yaml
 /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/rviz/sim.rviz
+/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/scripts/generate_curved_pipe_mesh.py
+/home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/scripts/generate_pipe_mesh.py
 /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation-0.0.1-py3.10.egg-info/entry_points.txt
 /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation-0.0.1-py3.10.egg-info/SOURCES.txt
 /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation-0.0.1-py3.10.egg-info/dependency_links.txt

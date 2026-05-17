@@ -11,6 +11,7 @@ setup.py
 config/bridge.yaml
 launch/gazebo.launch.py
 launch/sim.launch.py
+launch/video_inspect.launch.py
 meshes/pipe_hollow.stl
 pipe_simulation/__init__.py
 pipe_simulation/auto_drive_node.py
@@ -18,5 +19,7 @@ pipe_simulation/odom_depth_node.py
 pipe_simulation/synthetic_camera_node.py
 resource/pipe_simulation
 rviz/sim.rviz
+scripts/generate_curved_pipe_mesh.py
+scripts/generate_pipe_mesh.py
 urdf/pipe_bot.urdf.xacro
 worlds/pipe.world

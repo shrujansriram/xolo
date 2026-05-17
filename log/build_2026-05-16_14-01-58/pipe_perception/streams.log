@@ -1,0 +1,27 @@
+[0.523s] Invoking command in '/home/shrujans/xolo/src/pipe_perception': PYTHONPATH=/home/shrujans/xolo/build/pipe_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages: /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_perception build --build-base /home/shrujans/xolo/build/pipe_perception/build install --record /home/shrujans/xolo/build/pipe_perception/install.log --single-version-externally-managed install_data
+[0.610s] running egg_info
+[0.611s] writing ../../build/pipe_perception/pipe_perception.egg-info/PKG-INFO
+[0.612s] writing dependency_links to ../../build/pipe_perception/pipe_perception.egg-info/dependency_links.txt
+[0.612s] writing entry points to ../../build/pipe_perception/pipe_perception.egg-info/entry_points.txt
+[0.612s] writing requirements to ../../build/pipe_perception/pipe_perception.egg-info/requires.txt
+[0.612s] writing top-level names to ../../build/pipe_perception/pipe_perception.egg-info/top_level.txt
+[0.613s] reading manifest file '../../build/pipe_perception/pipe_perception.egg-info/SOURCES.txt'
+[0.614s] writing manifest file '../../build/pipe_perception/pipe_perception.egg-info/SOURCES.txt'
+[0.614s] running build
+[0.614s] running build_py
+[0.615s] copying pipe_perception/nodes/cylinder_visualizer_3d_node.py -> /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes
+[0.615s] running install
+[0.616s] running install_lib
+[0.616s] copying /home/shrujans/xolo/build/pipe_perception/build/lib/pipe_perception/nodes/cylinder_visualizer_3d_node.py -> /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes
+[0.618s] byte-compiling /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception/nodes/cylinder_visualizer_3d_node.py to cylinder_visualizer_3d_node.cpython-310.pyc
+[0.619s] running install_data
+[0.620s] running install_egg_info
+[0.621s] removing '/home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception-0.0.1-py3.10.egg-info' (and everything under it)
+[0.621s] Copying ../../build/pipe_perception/pipe_perception.egg-info to /home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages/pipe_perception-0.0.1-py3.10.egg-info
+[0.622s] running install_scripts
+[0.633s] Installing coverage_mapper_node script to /home/shrujans/xolo/install/pipe_perception/lib/pipe_perception
+[0.633s] Installing cylinder_unwrap_node script to /home/shrujans/xolo/install/pipe_perception/lib/pipe_perception
+[0.634s] Installing cylinder_visualizer_3d_node script to /home/shrujans/xolo/install/pipe_perception/lib/pipe_perception
+[0.634s] Installing video_ingest_node script to /home/shrujans/xolo/install/pipe_perception/lib/pipe_perception
+[0.634s] writing list of installed files to '/home/shrujans/xolo/build/pipe_perception/install.log'
+[0.646s] Invoked command in '/home/shrujans/xolo/src/pipe_perception' returned '0': PYTHONPATH=/home/shrujans/xolo/build/pipe_perception/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_perception/lib/python3.10/site-packages: /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_perception build --build-base /home/shrujans/xolo/build/pipe_perception/build install --record /home/shrujans/xolo/build/pipe_perception/install.log --single-version-externally-managed install_data

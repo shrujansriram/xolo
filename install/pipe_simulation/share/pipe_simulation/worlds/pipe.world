@@ -2,18 +2,19 @@
 <!--
 pipe.world
 ----------
-Gazebo Harmonic (gz-sim 8) world containing a single hollow cylinder pipe
-and a spawn point for the pipe_bot robot.
+Gazebo Harmonic (gz-sim 8) world containing a single hollow pipe and a
+spawn point for the pipe_bot robot.
 
 Coordinate frame
   World Z = up (Gazebo default gravity = -Z).
-  The pipe mesh runs along its local Z axis; a pitch of +pi/2 rotates
-  it to run along the WORLD X axis.
-  After rotation:
-    Pipe axis     : (0,0,0) -> (5,0,0)  (world X)
-    Pipe cross-section centre is at world Y=0, Z=0
-    Inner floor   : world Z = -0.15 m
-    Robot spawn   : x=0.3  y=0  z=-0.115  (wheels rest on floor at z=-0.15)
+  The pipe mesh is generated in WORLD coordinates by generate_curved_pipe_mesh.py
+  at launch time (via OpaqueFunction in sim.launch.py).  No rotation is needed.
+
+  For the default 90-degree arc (pipe_length=4.5 m, bend_angle_deg=90):
+    Pipe enters at world origin going in +X direction
+    Pipe curves in the horizontal XY plane
+    Pipe floor (inner bottom) : world Z = -0.15 m everywhere along the arc
+    Robot spawn : x=0.3  y=0  z=-0.115  (wheels rest at z=-0.15)
 
 Mesh resolution
   GZ_SIM_RESOURCE_PATH must include the package share directory so Gazebo
@@ -70,17 +71,14 @@ Mesh resolution
     <!-- ============================================================== -->
     <!-- Pipe model                                                       -->
     <!--                                                                  -->
-    <!-- The binary STL pipe_hollow.stl is a hollow cylinder:            -->
-    <!--   inner radius = 0.15 m, outer radius = 0.18 m, length = 5.0 m -->
-    <!--   mesh axis = local Z                                            -->
-    <!--                                                                  -->
-    <!-- Pose: roll=0  pitch=+pi/2  yaw=0                                -->
-    <!--   Rotates local Z onto world X, so the pipe runs East.          -->
+    <!-- The binary STL pipe_hollow.stl is regenerated at launch time    -->
+    <!-- (see sim.launch.py OpaqueFunction) in world coordinates.        -->
+    <!-- Identity pose — no rotation needed.                             -->
     <!-- ============================================================== -->
     <model name="pipe">
       <static>true</static>
-      <!-- x y z  roll pitch yaw -->
-      <pose>0 0 0  0 1.5708 0</pose>
+      <!-- x y z  roll pitch yaw — identity: mesh already in world coords -->
+      <pose>0 0 0  0 0 0</pose>
 
       <link name="pipe_link">
 

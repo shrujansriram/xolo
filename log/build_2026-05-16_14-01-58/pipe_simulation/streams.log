@@ -1,0 +1,32 @@
+[0.511s] Invoking command in '/home/shrujans/xolo/src/pipe_simulation': PYTHONPATH=/home/shrujans/xolo/build/pipe_simulation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages: /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_simulation build --build-base /home/shrujans/xolo/build/pipe_simulation/build install --record /home/shrujans/xolo/build/pipe_simulation/install.log --single-version-externally-managed install_data
+[0.599s] running egg_info
+[0.600s] writing ../../build/pipe_simulation/pipe_simulation.egg-info/PKG-INFO
+[0.601s] writing dependency_links to ../../build/pipe_simulation/pipe_simulation.egg-info/dependency_links.txt
+[0.601s] writing entry points to ../../build/pipe_simulation/pipe_simulation.egg-info/entry_points.txt
+[0.601s] writing requirements to ../../build/pipe_simulation/pipe_simulation.egg-info/requires.txt
+[0.602s] writing top-level names to ../../build/pipe_simulation/pipe_simulation.egg-info/top_level.txt
+[0.602s] reading manifest file '../../build/pipe_simulation/pipe_simulation.egg-info/SOURCES.txt'
+[0.603s] writing manifest file '../../build/pipe_simulation/pipe_simulation.egg-info/SOURCES.txt'
+[0.603s] running build
+[0.603s] running build_py
+[0.604s] copying pipe_simulation/auto_drive_node.py -> /home/shrujans/xolo/build/pipe_simulation/build/lib/pipe_simulation
+[0.604s] running install
+[0.604s] running install_lib
+[0.605s] copying /home/shrujans/xolo/build/pipe_simulation/build/lib/pipe_simulation/auto_drive_node.py -> /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation
+[0.605s] byte-compiling /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation/auto_drive_node.py to auto_drive_node.cpython-310.pyc
+[0.606s] running install_data
+[0.607s] copying launch/sim.launch.py -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/launch
+[0.607s] copying worlds/pipe.world -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/worlds
+[0.608s] copying rviz/sim.rviz -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/rviz
+[0.608s] creating /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/scripts
+[0.608s] copying scripts/generate_curved_pipe_mesh.py -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/scripts
+[0.608s] copying scripts/generate_pipe_mesh.py -> /home/shrujans/xolo/install/pipe_simulation/share/pipe_simulation/scripts
+[0.609s] running install_egg_info
+[0.609s] removing '/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation-0.0.1-py3.10.egg-info' (and everything under it)
+[0.611s] Copying ../../build/pipe_simulation/pipe_simulation.egg-info to /home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages/pipe_simulation-0.0.1-py3.10.egg-info
+[0.612s] running install_scripts
+[0.623s] Installing auto_drive_node script to /home/shrujans/xolo/install/pipe_simulation/lib/pipe_simulation
+[0.623s] Installing odom_depth_node script to /home/shrujans/xolo/install/pipe_simulation/lib/pipe_simulation
+[0.623s] Installing synthetic_camera_node script to /home/shrujans/xolo/install/pipe_simulation/lib/pipe_simulation
+[0.624s] writing list of installed files to '/home/shrujans/xolo/build/pipe_simulation/install.log'
+[0.649s] Invoked command in '/home/shrujans/xolo/src/pipe_simulation' returned '0': PYTHONPATH=/home/shrujans/xolo/build/pipe_simulation/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shrujans/xolo/install/pipe_simulation/lib/python3.10/site-packages: /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/pipe_simulation build --build-base /home/shrujans/xolo/build/pipe_simulation/build install --record /home/shrujans/xolo/build/pipe_simulation/install.log --single-version-externally-managed install_data

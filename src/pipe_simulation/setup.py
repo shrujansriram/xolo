@@ -23,6 +23,8 @@ setup(
         (f"share/{package_name}/config", glob("config/*")),
         # RViz configs
         (f"share/{package_name}/rviz", glob("rviz/*")),
+        # Scripts (mesh generators)
+        (f"share/{package_name}/scripts", glob("scripts/*.py")),
     ],
     install_requires=["setuptools"],
     zip_safe=True,
